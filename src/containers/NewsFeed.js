@@ -2,7 +2,8 @@
 import React from 'react'
 
 const NewsFeed = () => (
-  <div> News here </div>
+  <div>hahahah News here!!!!!!!!! </div>
 )
 
 export default NewsFeed
+

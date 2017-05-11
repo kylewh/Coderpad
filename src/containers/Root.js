@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { ConnectedRouter } from 'react-router-redux'
-import { injectGlobal } from 'styled-components'
 import reactTapEventPlugin from 'react-tap-event-plugin'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 /* Local*/
@@ -28,3 +27,5 @@ const Root = () => (
 )
 
 export default Root
+
+module.hot.accept()
