@@ -5,6 +5,7 @@ import WritePad from './WritePad'
 import NewsFeed from './NewsFeed'
 import styled, {injectGlobal} from 'styled-components'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
+import FullScreenContainer from '../styledComponents/FullScreenContainer'
 import NavBtn from '../styledComponents/NavBtn'
 import DashBoard from '../components/DashBoard'
 /* eslint-disable */
@@ -20,7 +21,7 @@ injectGlobal `
   body {
     font-family: "Helvetica Neue", "Arial", " Segoe UI", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif !important;
   }
-
+  
   ul,
   li {
     margin: 0;
@@ -38,26 +39,14 @@ injectGlobal `
   }
 `
 
-const AppContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background: white;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-
-
 const App = () => {
   return (
-    <AppContainer>
+    <FullScreenContainer>
       <NavBtn/>
       <Route exact path='/' component={DashBoard}/>
       <Route path='/write' component={WritePad}/>
       <Route path='/news' component={NewsFeed}/>
-    </AppContainer>
+    </FullScreenContainer>
   )
 }
 
