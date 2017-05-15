@@ -1,0 +1,7 @@
+export const TOGGLE_PREVIEW = 'TOGGLE_PREVIEW'
+
+export const EDIT_MARKDOWN = 'EDIT_MARKDOWN'
+
+export const TOGGLE_SAVEFILE = 'TOGGLE_SAVEFILE'
+
+export const SAVE_NEWFILE = 'SAVE_NEWFILE'

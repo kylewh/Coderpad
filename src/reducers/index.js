@@ -1,12 +1,14 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+import { createSelector } from 'reselect'
 import pomodoro from './pomodoro'
-import write from './write'
+import writePad from './writePad'
 import newsFeed from './newsFeed'
 
 const rootReducer = combineReducers({
-  write,
+  writePad,
   newsFeed,
   pomodoro
 })
 
 export default rootReducer
+

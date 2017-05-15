@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { combineReducers } from 'redux'
 import { createLogger } from 'redux-logger'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
 import rootReducer from './reducers'
@@ -18,7 +19,7 @@ const configureStore = () => {
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose
-
+  
   const store = createStore(
     combineReducers({
       app: rootReducer,

@@ -1,0 +1,41 @@
+$font-stack: "Helvetica Neue",
+"Arial",
+" Segoe UI",
+"PingFang SC",
+"Hiragino Sans GB",
+"STHeiti",
+"Microsoft YaHei",
+"Microsoft JhengHei",
+"Source Han Sans SC",
+"Noto Sans CJK SC",
+"Source Han Sans CN",
+"Noto Sans SC",
+"Source Han Sans TC",
+"Noto Sans CJK TC",
+"WenQuanYi Micro Hei",
+SimSun,
+sans-serif;
+$primary-color: #354A5D;
+html,
+body {
+  font: 62.5% $font-stack;
+  color: $primary-color;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  margin: 0;
+  font-size: 100%;
+  font-family: inherit;
+}
+

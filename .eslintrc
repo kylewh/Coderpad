@@ -4,7 +4,6 @@
     "react"
   ],
   "rules": {
-    "max-len": [1, 120, 2, {"ignoreComments": true}]
   },
-  "extends": ["standard"]
+  "extends": ["plugin:react/recommended"]
 }

@@ -46,12 +46,6 @@ const SlideInUp = keyframes`
   }
 `
 
-const SecondTitle = {
-  idea: '专注写作，输出灵感',
-  news: '社区热点，跟踪趋势',
-  radio: '放松一刻，醒神节奏'
-}
-
 const StyledSvg = styled.svg`
   fill: #354A5D;
   height: 150px;
