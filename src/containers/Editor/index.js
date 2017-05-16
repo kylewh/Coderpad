@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
 import { makeSelectTextValue, makeSelectIsPreview, makeSelectIsSaving } from
-'../../reducers/selectors'
+'./selector'
+import * as editorActions from './action'
+import _ from 'lodash'
 import marked from 'marked'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import Wrapper from './Wrapper'
 import AutoSizeTextarea from './Textarea'
 import EditorPanel from './EditorPanel'
-import ActionFlightTakeoff from 'material-ui/svg-icons/action/visibility'
-import DownLoad from 'material-ui/svg-icons/content/archive'
-import { togglePreview, editMarkdown, toggleSaveFile, saveNewFile } from '../../actions/'
-import classNames from 'classnames'
-import _ from 'lodash'
+import Preview from 'material-ui/svg-icons/action/visibility'
+import Save from 'material-ui/svg-icons/content/archive'
 import SaveFileModal from './SaveFileModal'
 
 class Editor extends Component {
@@ -28,11 +28,8 @@ class Editor extends Component {
     this.textarea.value = this._loadLocal()
       ? this._loadLocal()
       : this.props.textValue
-    this._initState(this.textarea.value)
-  }
-
-  _initState(val) {
-    this.props.editMarkdown(val)
+    // Forced synchronization between state&LocalStorage
+    this.props.editMarkdown(this.textarea.value)
   }
 
   _initHighLight() {
@@ -57,34 +54,57 @@ class Editor extends Component {
   }
 
   render() {
-    const {togglePreview, isPreview, isSaving, textValue, editMarkdown, toggleSaveFile, saveNewFile } = this.props
+    const {
+      isPreview,
+      isSaving,
+      textValue,
+      editMarkdown,
+      toggleSaveFile,
+      togglePreview,
+      saveNewFile
+    } = this.props
+
+    const markdownCls = classNames({
+      'preview-toggle': isPreview,
+      'markdown': true
+    })
+
+    const previewCls = classNames({
+      'preview-toggle': !isPreview,
+      'markdown': true
+    })
+
+    const previewIconCls = classNames({active: isPreview})
+    const saveIconCls = classNames({active: isSaving})
+
     return (
       <Wrapper>
+        {/* Markdown */}
         <AutoSizeTextarea
+          className={markdownCls}
           inputRef={node => this.textarea = node}
-          className={classNames({
-            'preview-toggle': isPreview,
-            'markdown': true
-          })}
-          onChange={this._onChange}/>
+          onChange={this._onChange}
+        />
+        {/* Preview */}
         <div
-          dangerouslySetInnerHTML={{ __html: marked(textValue) }}
-          className={classNames({
-            'preview-toggle': !isPreview,
-            'markdown': true
-          })}
+          className={previewCls}
+          dangerouslySetInnerHTML={{
+            __html: marked(textValue)
+          }}
         >
         </div>
+        {/* Editor tools panel */}
         <EditorPanel>
-          <ActionFlightTakeoff
+          <Preview
+            className={previewIconCls}
             onClick={togglePreview}
-            className={classNames({active: isPreview})}
           />
-          <DownLoad
+          <Save
+            className={saveIconCls}
             onClick={toggleSaveFile}
-            className={classNames({active: isSaving})}
           />
         </EditorPanel>
+        {/* Modal: enter filename */}
         <SaveFileModal
           isSaving={isSaving}
           onSave={saveNewFile}
@@ -114,10 +134,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  {
-    togglePreview,
-    editMarkdown,
-    toggleSaveFile,
-    saveNewFile
-  }
+  editorActions
 )(Editor)

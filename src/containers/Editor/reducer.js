@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect'
-import Immutable from 'immutable' 
-import * as actionTypes from '../actions/constant/'
+import Immutable from 'immutable'
+import { combineReducers } from 'redux-immutable'
+import * as actionTypes from '../App/constant'
+import ambientSound from '../Embient/reducer'
 
 const initialText =
   `## Welcome
@@ -16,7 +18,7 @@ const initialState = Immutable.fromJS({
 })
 
 
-const writePad = (state = initialState, action) => {
+const editor = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.TOGGLE_PREVIEW:
       return state.update('isPreview', (isPreview) => !isPreview )
@@ -34,5 +36,4 @@ const writePad = (state = initialState, action) => {
   }
 }
 
-export default writePad
-
+export default editor

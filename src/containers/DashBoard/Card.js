@@ -28,7 +28,7 @@ const Card = styled.div`
   width: 150px;
   &::after {
     display: none;
-    transition: opacity 0.2s ease-in;
+    transition: opacity 0.3s ease-in;
     content: '${styledProps(HoverTitle)}';
     position: absolute;
     bottom: -50px;
@@ -39,8 +39,8 @@ const Card = styled.div`
   }
   &:hover::after {
     display: block;
-    -webkit-animation: 0.2s ease-in ${SlideInUp};
-    animation: 0.2s ease-in ${SlideInUp};
+    -webkit-animation: 0.3s ease-in ${SlideInUp};
+    animation: 0.3s ease-in ${SlideInUp};
   }
   @media all and (max-width:768px) {
     &::after {
