@@ -1,0 +1,75 @@
+/* REACT HOT LOADER */ if (module.hot) { (function () { var ReactHotAPI = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+'use strict';
+
+exports.__esModule = true;
+
+require('babel-polyfill');
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require('react-redux');
+
+var _createBrowserHistory = require('history/createBrowserHistory');
+
+var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _reactRouterRedux = require('react-router-redux');
+
+var _reactTapEventPlugin = require('react-tap-event-plugin');
+
+var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
+
+var _MuiThemeProvider = require('material-ui/styles/MuiThemeProvider');
+
+var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+
+var _App = require('./containers/App');
+
+var _App2 = _interopRequireDefault(_App);
+
+var _selectors = require('./containers/App/selectors');
+
+var _store = require('./store');
+
+var _store2 = _interopRequireDefault(_store);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Needed for redux-saga es6 generator support
+(0, _reactTapEventPlugin2.default)();
+// Import root app
+
+// Import all the third party stuff
+
+
+// Import selector for `syncHistoryWithStore`
+
+
+var initialState = {};
+var history = (0, _createBrowserHistory2.default)();
+var store = (0, _store2.default)(initialState, history);
+
+var Root = function Root() {
+  return _react2.default.createElement(
+    _MuiThemeProvider2.default,
+    null,
+    _react2.default.createElement(
+      _reactRedux.Provider,
+      { store: store },
+      _react2.default.createElement(
+        _reactRouterRedux.ConnectedRouter,
+        { history: history },
+        _react2.default.createElement(_App2.default, null)
+      )
+    )
+  );
+};
+
+exports.default = Root;
+
+/* REACT HOT LOADER */ }).call(this); } finally { if (module.hot) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "Root.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }

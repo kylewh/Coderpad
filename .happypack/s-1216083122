@@ -1,0 +1,74 @@
+/* REACT HOT LOADER */ if (module.hot) { (function () { var ReactHotAPI = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+"use strict";
+
+exports.__esModule = true;
+
+var _templateObject = _taggedTemplateLiteralLoose(["\n  position: fixed;\n  top: calc(15vh - 15px);\n  right: 0;\n  display: flex;\n  padding-right: 3vw;\n  flex-direction: column;\n  & svg {\n    height: 30px !important;\n    width: 30px !important;\n    fill: #eee !important;\n    cursor: pointer;\n    margin: 10px 0;\n  }\n\n  & svg:hover {\n    fill: #B0BEC5 !important;\n  }\n\n  & svg.active {\n    fill: #78909c !important;\n  }\n"], ["\n  position: fixed;\n  top: calc(15vh - 15px);\n  right: 0;\n  display: flex;\n  padding-right: 3vw;\n  flex-direction: column;\n  & svg {\n    height: 30px !important;\n    width: 30px !important;\n    fill: #eee !important;\n    cursor: pointer;\n    margin: 10px 0;\n  }\n\n  & svg:hover {\n    fill: #B0BEC5 !important;\n  }\n\n  & svg.active {\n    fill: #78909c !important;\n  }\n"]);
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require("prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = require("classnames");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _styledComponents = require("styled-components");
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _visibility = require("material-ui/svg-icons/action/visibility");
+
+var _visibility2 = _interopRequireDefault(_visibility);
+
+var _save = require("material-ui/svg-icons/content/save");
+
+var _save2 = _interopRequireDefault(_save);
+
+var _folderOpen = require("material-ui/svg-icons/file/folder-open");
+
+var _folderOpen2 = _interopRequireDefault(_folderOpen);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
+
+var UL = _styledComponents2.default.ul(_templateObject);
+
+var EditorPanel = function EditorPanel(_ref) {
+  var toggleBrowse = _ref.toggleBrowse,
+      togglePreview = _ref.togglePreview,
+      toggleSaveFile = _ref.toggleSaveFile,
+      isBrowsing = _ref.isBrowsing,
+      isPreview = _ref.isPreview,
+      isSaving = _ref.isSaving;
+
+  var previewIconCls = (0, _classnames2.default)({ active: isPreview });
+  var saveIconCls = (0, _classnames2.default)({ active: isSaving });
+  var browseIconCls = (0, _classnames2.default)({ active: isBrowsing });
+  return _react2.default.createElement(
+    UL,
+    null,
+    _react2.default.createElement(_visibility2.default, { className: previewIconCls, onClick: togglePreview }),
+    _react2.default.createElement(_save2.default, { className: saveIconCls, onClick: toggleSaveFile }),
+    _react2.default.createElement(_folderOpen2.default, { className: browseIconCls, onClick: toggleBrowse })
+  );
+};
+
+EditorPanel.propTypes = {
+  toggleBrowse: _propTypes2.default.func,
+  togglePreview: _propTypes2.default.func,
+  toggleSaveFile: _propTypes2.default.func,
+  isBrowsing: _propTypes2.default.bool,
+  isPreview: _propTypes2.default.bool,
+  isSaving: _propTypes2.default.bool
+};
+
+exports.default = EditorPanel;
+
+/* REACT HOT LOADER */ }).call(this); } finally { if (module.hot) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "EditorPanel.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }

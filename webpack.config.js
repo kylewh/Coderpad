@@ -1,62 +1,67 @@
 /* eslint-disable */
-const webpack = require('webpack')
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require("webpack");
+const path = require("path");
+const HappyPack = require("happypack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const VENDOR_LIST = [
-  'react',
-  'redux',
-  'redux-logger',
-  'react-dom'
-]
+const VENDOR_LIST = ["react", "redux", "redux-logger", "react-dom"];
 
 module.exports = {
   entry: [
     "webpack-dev-server/client?http://localhost:8080",
     "webpack/hot/only-dev-server",
-    './src/index.js',
+    "./src/index.js"
   ],
-  devtool: 'source-map',
+  devtool: "cheap-module-eval-source-map",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist")
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, "dist"),
     compress: true,
     hot: true,
     port: 8080
   },
   resolve: {
-    extensions: ['.json', '.js', '.jsx', '.css']
+    extensions: [".json", ".js", ".jsx", ".css"]
   },
   module: {
-    loaders: [{
+    loaders: [
+      {
         test: /\.jsx|js?$/,
         exclude: /node_modules/,
-        loaders: [
-          'react-hot-loader',
-          'babel-loader',
-          'eslint-loader'
-        ]
+        loaders: ["happypack/loader?id=buildStuff"]
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        loaders: ["happypack/loader?id=css"]
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        loaders: ["happypack/loader?id=scss"]
       }
     ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: './index.html',
-      filename: './index.html',
-      title: 'Netease Cloud Music'
+      template: "./index.html",
+      filename: "./index.html",
+      title: "Netease Cloud Music"
+    }),
+    new HappyPack({
+      id: "buildStuff",
+      loaders: ["react-hot-loader", "babel-loader", "eslint-loader"]
+    }),
+    new HappyPack({
+      id: "css",
+      loaders: ["style-loader", "css-loader"]
+    }),
+    new HappyPack({
+      id: "scss",
+      loaders: ["style-loader", "css-loader", "sass-loader"]
     })
   ]
-}
+};

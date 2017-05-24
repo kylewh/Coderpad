@@ -1,0 +1,1 @@
+{"version":3,"sources":["/Users/Kylewh/Desktop/playground/projects/coderPad/src/containers/DashBoard/HoverTitle.js"],"names":["HoverTitle","idea","news","radio"],"mappings":";;;;;AAAO,IAAMA,kCAAa;AACxBC,QAAM,WADkB;AAExBC,QAAM,WAFkB;AAGxBC,SAAO;AAHiB,CAAnB,C","sourcesContent":["export const HoverTitle = {\n  idea: '专注写作，输出灵感',\n  news: '社区热点，跟踪趋势',\n  radio: '放松一刻，醒神节奏' \n}\n"]}

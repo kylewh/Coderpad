@@ -1,0 +1,34 @@
+/* REACT HOT LOADER */ if (module.hot) { (function () { var ReactHotAPI = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+'use strict';
+
+exports.__esModule = true;
+
+var _templateObject = _taggedTemplateLiteralLoose(['\n  0% {\n    opacity: 0;\n    visibility: visible;\n    transform: translateY(100%);\n    -webkit-transform: translateY(100%);\n  }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n  }\n'], ['\n  0% {\n    opacity: 0;\n    visibility: visible;\n    transform: translateY(100%);\n    -webkit-transform: translateY(100%);\n  }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n  }\n']),
+    _templateObject2 = _taggedTemplateLiteralLoose(['\n  position: relative;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 20px;\n  cursor: pointer;\n  z-index: 10;\n  width: 150px;\n  &::after {\n    display: none;\n    transition: opacity 0.3s ease-in;\n    content: \'', '\';\n    position: absolute;\n    bottom: -50px;\n    width: 200px;\n    left: -25px;\n    text-align: center;\n    font-size: 20px;\n  }\n  &:hover::after {\n    display: block;\n    -webkit-animation: 0.3s ease-in ', ';\n    animation: 0.3s ease-in ', ';\n  }\n  @media all and (max-width:768px) {\n    &::after {\n      bottom: -35px;\n      width: 200px;\n    }\n  }\n'], ['\n  position: relative;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border-radius: 20px;\n  cursor: pointer;\n  z-index: 10;\n  width: 150px;\n  &::after {\n    display: none;\n    transition: opacity 0.3s ease-in;\n    content: \'', '\';\n    position: absolute;\n    bottom: -50px;\n    width: 200px;\n    left: -25px;\n    text-align: center;\n    font-size: 20px;\n  }\n  &:hover::after {\n    display: block;\n    -webkit-animation: 0.3s ease-in ', ';\n    animation: 0.3s ease-in ', ';\n  }\n  @media all and (max-width:768px) {\n    &::after {\n      bottom: -35px;\n      width: 200px;\n    }\n  }\n']);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = require('styled-components');
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _styledProps = require('styled-props');
+
+var _styledProps2 = _interopRequireDefault(_styledProps);
+
+var _HoverTitle = require('./HoverTitle');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
+
+var SlideInUp = (0, _styledComponents.keyframes)(_templateObject);
+
+var Card = _styledComponents2.default.div(_templateObject2, (0, _styledProps2.default)(_HoverTitle.HoverTitle), SlideInUp, SlideInUp);
+
+exports.default = Card;
+
+/* REACT HOT LOADER */ }).call(this); } finally { if (module.hot) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "Card.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }

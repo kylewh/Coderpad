@@ -1,0 +1,22 @@
+/* REACT HOT LOADER */ if (module.hot) { (function () { var ReactHotAPI = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+'use strict';
+
+exports.__esModule = true;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NewsFeed = function NewsFeed() {
+  return _react2.default.createElement(
+    'div',
+    null,
+    'hahahah News here!!!!!!!!! '
+  );
+}; /* eslint-disable */
+exports.default = NewsFeed;
+
+/* REACT HOT LOADER */ }).call(this); } finally { if (module.hot) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }

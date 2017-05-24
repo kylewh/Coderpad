@@ -1,0 +1,61 @@
+/* REACT HOT LOADER */ if (module.hot) { (function () { var ReactHotAPI = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+'use strict';
+
+exports.__esModule = true;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.default = configureStore;
+
+var _redux = require('redux');
+
+var _reduxLogger = require('redux-logger');
+
+var _reactRouterRedux = require('react-router-redux');
+
+var _immutable = require('immutable');
+
+var _reduxSaga = require('redux-saga');
+
+var _reduxSaga2 = _interopRequireDefault(_reduxSaga);
+
+var _reducers = require('./reducers');
+
+var _reducers2 = _interopRequireDefault(_reducers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var sagaMiddleware = (0, _reduxSaga2.default)();
+
+function configureStore() {
+  var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var history = arguments[1];
+
+  /**
+   *  Create the store with three middlewares
+   *  1. action Logger: mark every dispatch
+   *  2. sagaMiddleware: Makes redux-sagas work
+   *  3. routerMiddleware: Syncs the location/URL path to the state
+  */
+  var middlewarles = [];
+  middlewarles.push((0, _reduxLogger.createLogger)());
+  middlewarles.push(sagaMiddleware);
+  middlewarles.push((0, _reactRouterRedux.routerMiddleware)(history));
+
+  var enhancers = [_redux.applyMiddleware.apply(undefined, middlewarles)];
+
+  // If Redux DevTools Extension is installed use it, otherwise use Redux compose
+  /* eslint-disable no-underscore-dangle */
+  var composeEnhancers = process.env.NODE_ENV !== 'production' && (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : _redux.compose;
+  /* eslint-enable */
+
+  var store = (0, _redux.createStore)((0, _reducers2.default)(), (0, _immutable.fromJS)(initialState), composeEnhancers.apply(undefined, enhancers));
+
+  // Extensions
+  store.runSaga = sagaMiddleware.run;
+
+  return store;
+}
+
+/* REACT HOT LOADER */ }).call(this); } finally { if (module.hot) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "store.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }

@@ -1,109 +1,130 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import { makeSelectTextValue, makeSelectIsPreview, makeSelectIsSaving } from
-'./selector'
-import * as editorActions from './action'
-import _ from 'lodash'
-import marked from 'marked'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import Wrapper from './Wrapper'
-import AutoSizeTextarea from './Textarea'
-import EditorPanel from './EditorPanel'
-import Preview from 'material-ui/svg-icons/action/visibility'
-import Save from 'material-ui/svg-icons/content/archive'
-import SaveFileModal from './SaveFileModal'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import {
+  makeSelectTextValue,
+  makeSelectIsPreview,
+  makeSelectIsSaving,
+  makeSelectIsBrowsing,
+  makeSelectSavedFiles
+} from "./selector";
+import * as editorActions from "./action";
+import debounce from "lodash/debounce";
+import marked from "marked";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import Wrapper from "./Wrapper";
+import AutoSizeTextarea from "./Textarea";
+import EditorPanel from "./EditorPanel";
+import Preview from "material-ui/svg-icons/action/visibility";
+import Save from "material-ui/svg-icons/content/archive";
+import SaveFileModal from "./SaveFileModal";
+import BrowseFileModal from "./browseFileModal";
 
 class Editor extends Component {
   constructor(props) {
-    super(props)
-    this.prefix = 'coderPad'
-    this._onChange = _.debounce(this._onChange, 500)
+    super(props);
+    this.onChange = debounce(this.onChange, 500);
   }
 
   componentWillMount() {
-    this._initHighLight()
+    this._initHighLight();
   }
+
   componentDidMount() {
-    this.textarea.value = this._loadLocal()
-      ? this._loadLocal()
-      : this.props.textValue
+    this.textarea.value = this.loadLocal()
+      ? this.loadLocal()
+      : this.props.textValue;
     // Forced synchronization between state&LocalStorage
-    this.props.editMarkdown(this.textarea.value)
+    this.props.editMarkdown(this.textarea.value);
   }
 
   _initHighLight() {
-    const hlScript = document.createElement('script')
-    hlScript.type = 'text/javascript'
-    hlScript.src = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js'
-    document.getElementsByTagName('head')[0].appendChild(hlScript)
-    hlScript.onload = function () {
-      window.hljs.initHighlightingOnLoad()
-      console.log('%c HilghtJS initiaized', 'color: #8bc34a; font-weight: bold;')
+    const hlScript = document.createElement("script");
+    hlScript.type = "text/javascript";
+    hlScript.src =
+      "//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js";
+    document.getElementsByTagName("head")[0].appendChild(hlScript);
+    hlScript.onload = function() {
+      window.hljs.initHighlightingOnLoad();
+      console.log(
+        "%c HilghtJS initiaized",
+        "color: #8bc34a; font-weight: bold;"
+      );
+    };
+  }
+
+  loadLocal = () => {
+    return localStorage.getItem("currentText");
+  };
+
+  onChange = () => {
+    const result = this.textarea.value;
+    localStorage.setItem("currentText", result);
+    this.props.editMarkdown(result);
+  };
+
+  mockSave = e => {
+    if ((e.ctrlKey || e.metaKey) && e.keyCode === 83) {
+      e.preventDefault();
+      this.props.toggleSaveFile();
     }
-  }
-
-  _loadLocal = () => {
-    return localStorage.getItem(this.prefix)
-  }
-
-  _onChange = () => {
-    const result = this.textarea.value
-    localStorage.setItem(this.prefix, result)
-    this.props.editMarkdown(result)
-  }
+  };
 
   render() {
     const {
       isPreview,
       isSaving,
+      savedFiles,
       textValue,
+      isBrowsing,
       editMarkdown,
       toggleSaveFile,
+      loadLocalFiles,
       togglePreview,
+      toggleBrowse,
       saveNewFile
-    } = this.props
+    } = this.props;
 
     const markdownCls = classNames({
-      'preview-toggle': isPreview,
-      'markdown': true
-    })
+      "hidden-toggle": isPreview || isBrowsing,
+      markdown: true
+    });
 
     const previewCls = classNames({
-      'preview-toggle': !isPreview,
-      'markdown': true
-    })
+      "hidden-toggle": !isPreview,
+      markdown: true
+    });
 
-    const previewIconCls = classNames({active: isPreview})
-    const saveIconCls = classNames({active: isSaving})
+    const browseCls = classNames({
+      "hidden-toggle": !isBrowsing
+    });
 
     return (
       <Wrapper>
-        {/* Markdown */}
+        {/* Markdown -Editor */}
         <AutoSizeTextarea
           className={markdownCls}
-          inputRef={node => this.textarea = node}
-          onChange={this._onChange}
+          inputRef={node => (this.textarea = node)}
+          onChange={this.onChange}
+          onKeyDown={this.mockSave}
         />
-        {/* Preview */}
+        {/* Preview -Overlay*/}
         <div
           className={previewCls}
           dangerouslySetInnerHTML={{
             __html: marked(textValue)
           }}
-        >
-        </div>
-        {/* Editor tools panel */}
-        <EditorPanel>
-          <Preview
-            className={previewIconCls}
-            onClick={togglePreview}
-          />
-          <Save
-            className={saveIconCls}
-            onClick={toggleSaveFile}
-          />
-        </EditorPanel>
+        />
+        <div />
+        {/* Editor tools panel - Aside */}
+        <EditorPanel
+          togglePreview={togglePreview}
+          toggleSaveFile={toggleSaveFile}
+          toggleBrowse={toggleBrowse}
+          isBrowsing={isBrowsing}
+          isPreview={isPreview}
+          isSaving={isSaving}
+        />
         {/* Modal: enter filename */}
         <SaveFileModal
           isSaving={isSaving}
@@ -111,8 +132,14 @@ class Editor extends Component {
           onCancel={toggleSaveFile}
           textValue={textValue}
         />
+        <BrowseFileModal
+          isBrowsing={isBrowsing}
+          toggleBrowse={toggleBrowse}
+          loadLocalFiles={loadLocalFiles}
+          savedFiles={savedFiles}
+        />
       </Wrapper>
-    )
+    );
   }
 }
 
@@ -121,18 +148,21 @@ Editor.propTypes = {
   togglePreview: PropTypes.func,
   isPreview: PropTypes.bool,
   isSaving: PropTypes.bool,
+  isBrowsing: PropTypes.bool,
   editMarkdown: PropTypes.func,
   toggleSaveFile: PropTypes.func,
-  saveNewFile: PropTypes.func
-}
+  loadLocalFiles: PropTypes.func,
+  toggleBrowse: PropTypes.func,
+  saveNewFile: PropTypes.func,
+  savedFiles: PropTypes.object
+};
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   textValue: makeSelectTextValue(state),
   isPreview: makeSelectIsPreview(state),
-  isSaving: makeSelectIsSaving(state)
-})
+  isSaving: makeSelectIsSaving(state),
+  isBrowsing: makeSelectIsBrowsing(state),
+  savedFiles: makeSelectSavedFiles(state)
+});
 
-export default connect(
-  mapStateToProps,
-  editorActions
-)(Editor)
+export default connect(mapStateToProps, editorActions)(Editor);

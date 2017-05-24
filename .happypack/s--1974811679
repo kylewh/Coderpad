@@ -1,0 +1,27 @@
+SyntaxError: Unexpected token (35:26)
+
+[0m [90m 33 | [39m    [36mreturn[39m (
+ [90m 34 | [39m      [33m<[39m[33mdiv[39m className[33m=[39m{browseCls}[33m>[39m
+[31m[1m>[22m[39m[90m 35 | [39m        {[33mObject[39m[33m.[39mkeys([36mthis[39m[33m.[39m)}
+ [90m    | [39m                          [31m[1m^[22m[39m
+ [90m 36 | [39m      [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m 37 | [39m    )
+ [90m 38 | [39m  }[0m
+
+Error
+    at transpile (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/babel-loader/lib/index.js:63:13)
+    at Object.module.exports (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/babel-loader/lib/index.js:163:20)
+    at applySyncOrAsync (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:341:21)
+    at apply (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:268:5)
+    at /Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:274:9
+    at /Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:330:17
+    at Object.callback (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/fnOncePedantic.js:10:15)
+    at Object.module.exports (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/eslint-loader/index.js:207:8)
+    at applySyncOrAsync (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:341:21)
+    at apply (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:268:5)
+    at /Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:131:7
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:184:14)
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:192:14)
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:192:14)
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:192:14)
+    at applyPitchLoaders (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:222:4)

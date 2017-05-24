@@ -1,0 +1,32 @@
+/* REACT HOT LOADER */ if (module.hot) { (function () { var ReactHotAPI = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+"use strict";
+
+exports.__esModule = true;
+exports.makeSelectSavedFiles = exports.makeSelectTextValue = exports.makeSelectIsBrowsing = exports.makeSelectIsSaving = exports.makeSelectIsPreview = undefined;
+
+var _reselect = require("reselect");
+
+var _selector = require("../WritePad/selector");
+
+var makeSelectIsPreview = exports.makeSelectIsPreview = (0, _reselect.createSelector)(_selector.makeSelectEditor, function (editorState) {
+  return editorState.get("isPreview");
+});
+
+var makeSelectIsSaving = exports.makeSelectIsSaving = (0, _reselect.createSelector)(_selector.makeSelectEditor, function (editorState) {
+  return editorState.get("isSaving");
+});
+
+var makeSelectIsBrowsing = exports.makeSelectIsBrowsing = (0, _reselect.createSelector)(_selector.makeSelectEditor, function (editorState) {
+  return editorState.get("isBrowsing");
+});
+
+var makeSelectTextValue = exports.makeSelectTextValue = (0, _reselect.createSelector)(_selector.makeSelectEditor, function (editorState) {
+  return editorState.get("textValue");
+});
+
+var makeSelectSavedFiles = exports.makeSelectSavedFiles = (0, _reselect.createSelector)(_selector.makeSelectEditor, function (editorState) {
+  return editorState.get("savedFiles");
+});
+
+/* REACT HOT LOADER */ }).call(this); } finally { if (module.hot) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "selector.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }

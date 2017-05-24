@@ -1,14 +1,14 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   flex-basis: 55vw;
-  & .preview-toggle {
+  padding-top: 15vh;
+  & .hidden-toggle {
     display: none;
   }
   & .markdown {
     min-height: 500px;
     width: 100%;
-    margin-top: 15vh;
     padding: 0;
     font-size: 20px;
     background-color: transparent;
@@ -16,6 +16,6 @@ const Wrapper = styled.div`
     font-family: 'Inconsolata', monospace;
     line-height: 1.5;
   }
-`
+`;
 
-export default Wrapper
+export default Wrapper;

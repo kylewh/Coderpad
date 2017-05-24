@@ -1,0 +1,27 @@
+SyntaxError: JSX attributes must only be assigned a non-empty expression (140:20)
+
+[0m [90m 138 | [39m          toggleBrowse[33m=[39m{toggleBrowse}
+ [90m 139 | [39m          loadLocalFiles[33m=[39m{loadLocalFiles}
+[31m[1m>[22m[39m[90m 140 | [39m          savedFile[33m=[39m{}
+ [90m     | [39m                    [31m[1m^[22m[39m
+ [90m 141 | [39m        [33m/[39m[33m>[39m
+ [90m 142 | [39m      [33m<[39m[33m/[39m[33mWrapper[39m[33m>[39m
+ [90m 143 | [39m    )[33m;[39m[0m
+
+Error
+    at transpile (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/babel-loader/lib/index.js:63:13)
+    at Object.module.exports (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/babel-loader/lib/index.js:163:20)
+    at applySyncOrAsync (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:341:21)
+    at apply (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:268:5)
+    at /Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:274:9
+    at /Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:330:17
+    at Object.callback (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/fnOncePedantic.js:10:15)
+    at Object.module.exports (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/eslint-loader/index.js:207:8)
+    at applySyncOrAsync (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:341:21)
+    at apply (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:268:5)
+    at /Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:131:7
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:184:14)
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:192:14)
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:192:14)
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:192:14)
+    at applyPitchLoaders (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:222:4)

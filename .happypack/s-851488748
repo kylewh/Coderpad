@@ -1,0 +1,71 @@
+/* REACT HOT LOADER */ if (module.hot) { (function () { var ReactHotAPI = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+"use strict";
+
+exports.__esModule = true;
+
+var _reselect = require("reselect");
+
+var _immutable = require("immutable");
+
+var _immutable2 = _interopRequireDefault(_immutable);
+
+var _reduxImmutable = require("redux-immutable");
+
+var _constant = require("../App/constant");
+
+var actionTypes = _interopRequireWildcard(_constant);
+
+var _reducer = require("../Embient/reducer");
+
+var _reducer2 = _interopRequireDefault(_reducer);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialText = "## Welcome    \n\nHi, I am distraction-free text editor :)    \n\nFeatures:    \n- Support markdown syntax\n- Automatically save current text for you\n- Save / Download file";
+
+var initialState = _immutable2.default.fromJS({
+  textValue: initialText,
+  isPreview: false,
+  isSaving: false,
+  isBrowsing: false,
+  savedFiles: {}
+});
+
+var editor = function editor() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case actionTypes.TOGGLE_PREVIEW:
+      return state.update("isPreview", function (isPreview) {
+        return !isPreview;
+      });
+    case actionTypes.TOGGLE_SAVEFILE:
+      return state.update("isSaving", function (isSaving) {
+        return !isSaving;
+      });
+    case actionTypes.TOGGLE_BROWSE:
+      return state.update("isBrowsing", function (isBrowsing) {
+        return !isBrowsing;
+      });
+    case actionTypes.EDIT_MARKDOWN:
+      return state.set("textValue", action.payload);
+    case actionTypes.SAVE_NEWFILE:
+      console.log(action.textValue);
+      return state.setIn(["savedFiles", action.name], {
+        textValue: action.textValue
+      });
+    case actionTypes.LOAD_LOCALFILES:
+      // pitfall alert: ensure that your value is immutable type
+      return state.set("savedFiles", _immutable2.default.fromJS(action.payload));
+    default:
+      return state;
+  }
+};
+
+exports.default = editor;
+
+/* REACT HOT LOADER */ }).call(this); } finally { if (module.hot) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "reducer.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }

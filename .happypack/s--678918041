@@ -1,0 +1,224 @@
+/* REACT HOT LOADER */ if (module.hot) { (function () { var ReactHotAPI = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+"use strict";
+
+exports.__esModule = true;
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require("react-redux");
+
+var _selector = require("./selector");
+
+var _action = require("./action");
+
+var editorActions = _interopRequireWildcard(_action);
+
+var _debounce = require("lodash/debounce");
+
+var _debounce2 = _interopRequireDefault(_debounce);
+
+var _marked = require("marked");
+
+var _marked2 = _interopRequireDefault(_marked);
+
+var _propTypes = require("prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _classnames = require("classnames");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _Wrapper = require("./Wrapper");
+
+var _Wrapper2 = _interopRequireDefault(_Wrapper);
+
+var _Textarea = require("./Textarea");
+
+var _Textarea2 = _interopRequireDefault(_Textarea);
+
+var _EditorPanel = require("./EditorPanel");
+
+var _EditorPanel2 = _interopRequireDefault(_EditorPanel);
+
+var _visibility = require("material-ui/svg-icons/action/visibility");
+
+var _visibility2 = _interopRequireDefault(_visibility);
+
+var _archive = require("material-ui/svg-icons/content/archive");
+
+var _archive2 = _interopRequireDefault(_archive);
+
+var _SaveFileModal = require("./SaveFileModal");
+
+var _SaveFileModal2 = _interopRequireDefault(_SaveFileModal);
+
+var _browseFileModal = require("./browseFileModal");
+
+var _browseFileModal2 = _interopRequireDefault(_browseFileModal);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Editor = function (_Component) {
+  _inherits(Editor, _Component);
+
+  function Editor(props) {
+    _classCallCheck(this, Editor);
+
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+
+    _this.loadLocal = function () {
+      return localStorage.getItem("currentText");
+    };
+
+    _this.onChange = function () {
+      var result = _this.textarea.value;
+      localStorage.setItem("currentText", result);
+      _this.props.editMarkdown(result);
+    };
+
+    _this.mockSave = function (e) {
+      if ((e.ctrlKey || e.metaKey) && e.keyCode === 83) {
+        e.preventDefault();
+        _this.props.toggleSaveFile();
+      }
+    };
+
+    _this.onChange = (0, _debounce2.default)(_this.onChange, 500);
+    return _this;
+  }
+
+  Editor.prototype.componentWillMount = function componentWillMount() {
+    this._initHighLight();
+  };
+
+  Editor.prototype.componentDidMount = function componentDidMount() {
+    this.textarea.value = this.loadLocal() ? this.loadLocal() : this.props.textValue;
+    // Forced synchronization between state&LocalStorage
+    this.props.editMarkdown(this.textarea.value);
+  };
+
+  Editor.prototype._initHighLight = function _initHighLight() {
+    var hlScript = document.createElement("script");
+    hlScript.type = "text/javascript";
+    hlScript.src = "//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js";
+    document.getElementsByTagName("head")[0].appendChild(hlScript);
+    hlScript.onload = function () {
+      window.hljs.initHighlightingOnLoad();
+      console.log("%c HilghtJS initiaized", "color: #8bc34a; font-weight: bold;");
+    };
+  };
+
+  Editor.prototype.render = function render() {
+    var _this2 = this;
+
+    var _props = this.props,
+        isPreview = _props.isPreview,
+        isSaving = _props.isSaving,
+        savedFiles = _props.savedFiles,
+        textValue = _props.textValue,
+        isBrowsing = _props.isBrowsing,
+        editMarkdown = _props.editMarkdown,
+        toggleSaveFile = _props.toggleSaveFile,
+        loadLocalFiles = _props.loadLocalFiles,
+        togglePreview = _props.togglePreview,
+        toggleBrowse = _props.toggleBrowse,
+        saveNewFile = _props.saveNewFile;
+
+
+    var markdownCls = (0, _classnames2.default)({
+      "hidden-toggle": isPreview || isBrowsing,
+      markdown: true
+    });
+
+    var previewCls = (0, _classnames2.default)({
+      "hidden-toggle": !isPreview,
+      markdown: true
+    });
+
+    var browseCls = (0, _classnames2.default)({
+      "hidden-toggle": !isBrowsing
+    });
+
+    return _react2.default.createElement(
+      _Wrapper2.default,
+      null,
+      _react2.default.createElement(_Textarea2.default, {
+        className: markdownCls,
+        inputRef: function inputRef(node) {
+          return _this2.textarea = node;
+        },
+        onChange: this.onChange,
+        onKeyDown: this.mockSave
+      }),
+      _react2.default.createElement("div", {
+        className: previewCls,
+        dangerouslySetInnerHTML: {
+          __html: (0, _marked2.default)(textValue)
+        }
+      }),
+      _react2.default.createElement("div", null),
+      _react2.default.createElement(_EditorPanel2.default, {
+        togglePreview: togglePreview,
+        toggleSaveFile: toggleSaveFile,
+        toggleBrowse: toggleBrowse,
+        isBrowsing: isBrowsing,
+        isPreview: isPreview,
+        isSaving: isSaving
+      }),
+      _react2.default.createElement(_SaveFileModal2.default, {
+        isSaving: isSaving,
+        onSave: saveNewFile,
+        onCancel: toggleSaveFile,
+        textValue: textValue
+      }),
+      _react2.default.createElement(_browseFileModal2.default, {
+        isBrowsing: isBrowsing,
+        toggleBrowse: toggleBrowse,
+        loadLocalFiles: loadLocalFiles,
+        savedFiles: savedFiles
+      })
+    );
+  };
+
+  return Editor;
+}(_react.Component);
+
+Editor.propTypes = {
+  textValue: _propTypes2.default.string,
+  togglePreview: _propTypes2.default.func,
+  isPreview: _propTypes2.default.bool,
+  isSaving: _propTypes2.default.bool,
+  isBrowsing: _propTypes2.default.bool,
+  editMarkdown: _propTypes2.default.func,
+  toggleSaveFile: _propTypes2.default.func,
+  loadLocalFiles: _propTypes2.default.func,
+  toggleBrowse: _propTypes2.default.func,
+  saveNewFile: _propTypes2.default.func,
+  savedFiles: _propTypes2.default.object
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    textValue: (0, _selector.makeSelectTextValue)(state),
+    isPreview: (0, _selector.makeSelectIsPreview)(state),
+    isSaving: (0, _selector.makeSelectIsSaving)(state),
+    isBrowsing: (0, _selector.makeSelectIsBrowsing)(state),
+    savedFiles: (0, _selector.makeSelectSavedFiles)(state)
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, editorActions)(Editor);
+
+/* REACT HOT LOADER */ }).call(this); } finally { if (module.hot) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }

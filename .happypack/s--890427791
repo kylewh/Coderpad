@@ -1,0 +1,160 @@
+/* REACT HOT LOADER */ if (module.hot) { (function () { var ReactHotAPI = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+"use strict";
+
+exports.__esModule = true;
+
+var _templateObject = _taggedTemplateLiteralLoose(["\n  width: 100%;\n"], ["\n  width: 100%;\n"]);
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = require("react-redux");
+
+var _styledComponents = require("styled-components");
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _classnames = require("classnames");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _immutable = require("immutable");
+
+var _immutable2 = _interopRequireDefault(_immutable);
+
+var _fileItem = require("./fileItem");
+
+var _fileItem2 = _interopRequireDefault(_fileItem);
+
+var _propTypes = require("prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _Dialog = require("material-ui/Dialog");
+
+var _Dialog2 = _interopRequireDefault(_Dialog);
+
+var _FlatButton = require("material-ui/FlatButton");
+
+var _FlatButton2 = _interopRequireDefault(_FlatButton);
+
+var _RaisedButton = require("material-ui/RaisedButton");
+
+var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+var _DatePicker = require("material-ui/DatePicker");
+
+var _DatePicker2 = _interopRequireDefault(_DatePicker);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
+
+var UL = _styledComponents2.default.ul(_templateObject);
+
+var BrowseFileModal = function (_Component) {
+  _inherits(BrowseFileModal, _Component);
+
+  function BrowseFileModal(props) {
+    _classCallCheck(this, BrowseFileModal);
+
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+
+    _this.mockSubmit = function (e) {
+      e.keyCode === 13 && _this.handleSave();
+    };
+
+    _this.renderFileList = function () {
+      return Object.keys(_this.oSavedFiles).map(function (item) {
+        return _react2.default.createElement(_fileItem2.default, {
+          key: _this.oSavedFiles[item],
+          fileName: item.substr(9),
+          content: _this.oSavedFiles[item]
+        });
+      });
+    };
+
+    _this.oSavedFiles = _this.props.savedFiles.toJS();
+    return _this;
+  }
+
+  BrowseFileModal.prototype.componentWillMount = function componentWillMount() {
+    this.props.loadLocalFiles();
+  };
+
+  BrowseFileModal.prototype.render = function render() {
+    var _props = this.props,
+        isBrowsing = _props.isBrowsing,
+        toggleBrowse = _props.toggleBrowse,
+        savedFiles = _props.savedFiles;
+
+    var actions = [_react2.default.createElement(_FlatButton2.default, {
+      label: "OK",
+      primary: true,
+      keyboardFocused: true,
+      onTouchTap: toggleBrowse
+    })];
+    return _react2.default.createElement(
+      "div",
+      null,
+      _react2.default.createElement(
+        _Dialog2.default,
+        {
+          title: "File List",
+          actions: actions,
+          modal: false,
+          open: isBrowsing,
+          autoScrollBodyContent: true,
+          onRequestClose: this.handleClose,
+          contentStyle: {
+            width: "50vw"
+          },
+          bodyStyle: {
+            display: "flex",
+            justifyContent: "center"
+          },
+          titleStyle: {
+            fontWeight: "300"
+          }
+        },
+        _react2.default.createElement(
+          UL,
+          null,
+          Object.keys(this.oSavedFiles).length ? renderFileList() : _react2.default.createElement(
+            "span",
+            null,
+            "You haven't saved any file yet :)"
+          )
+        )
+      )
+    );
+  };
+
+  return BrowseFileModal;
+}(_react.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    isBrowsing: makeSelectIsBrowsing(state),
+    savedFiles: makeSelectSavedFiles(state)
+  };
+};
+
+BrowseFileModal.propTypes = {
+  isBrowsing: _propTypes2.default.bool,
+  toggleBrowse: _propTypes2.default.func,
+  savedFiles: _propTypes2.default.object,
+  loadLocalFiles: _propTypes2.default.func
+};
+
+exports.default = (0, _reactRedux.connect)()(BrowseFileModal);
+
+/* REACT HOT LOADER */ }).call(this); } finally { if (module.hot) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "browseFileModal.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
