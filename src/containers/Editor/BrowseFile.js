@@ -1,27 +1,27 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import Immutable from "immutable";
-import { makeSelectIsBrowsing, makeSelectSavedFiles } from "./selector";
-import { loadLocalFiles } from "./action";
-import FileItem from "./fileItem";
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import Immutable from 'immutable'
+import { makeSelectIsBrowsing, makeSelectSavedFiles } from './selector'
+import { loadLocalFiles } from './action'
+import FileItem from './fileItem'
 
 class BrowseFile extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
   }
 
-  componentWillMount() {
-    this.props.loadLocalFiles();
+  componentWillMount () {
+    this.props.loadLocalFiles()
   }
 
-  render() {
-    const { isBrowsing } = this.props;
+  render () {
+    const { isBrowsing } = this.props
     const browseCls = classNames({
-      "hidden-toggle": !isBrowsing
-    });
-    const oSavedFiles = this.props.savedFiles.toJS();
+      'hidden-toggle': !isBrowsing
+    })
+    const oSavedFiles = this.props.savedFiles.toJS()
     return (
       <div className={browseCls}>
         <ul>
@@ -34,7 +34,7 @@ class BrowseFile extends Component {
           ))}
         </ul>
       </div>
-    );
+    )
   }
 }
 
@@ -42,11 +42,11 @@ BrowseFile.propTypes = {
   savedFiles: PropTypes.object,
   isBrowsing: PropTypes.bool,
   loadLocalFiles: PropTypes.func
-};
+}
 
 const mapStateToProps = state => ({
   isBrowsing: makeSelectIsBrowsing(state),
   savedFiles: makeSelectSavedFiles(state)
-});
+})
 
-export default connect(mapStateToProps, { loadLocalFiles })(BrowseFile);
+export default connect(mapStateToProps, { loadLocalFiles })(BrowseFile)

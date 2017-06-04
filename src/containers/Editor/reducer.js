@@ -1,9 +1,11 @@
-import { createSelector } from "reselect";
 import Immutable from "immutable";
+import { createSelector } from "reselect";
 import { combineReducers } from "redux-immutable";
 import * as actionTypes from "../App/constant";
+/** Reducer */
 import ambientSound from "../Embient/reducer";
 
+// Initialization content
 const initialText = `## Welcome    
 
 Hi, I am distraction-free text editor :)    
@@ -32,12 +34,14 @@ const editor = (state = initialState, action) => {
     case actionTypes.EDIT_MARKDOWN:
       return state.set("textValue", action.payload);
     case actionTypes.SAVE_NEWFILE:
-      console.log(action.textValue);
       return state.setIn(["savedFiles", action.name], {
         textValue: action.textValue
       });
+    case actionTypes.REMOVE_FILE:
+      return state.deleteIn(["savedFiles", action.name]);
     case actionTypes.LOAD_LOCALFILES:
       // pitfall alert: ensure that your value is immutable type
+      // So this is a downside of immutable.js
       return state.set("savedFiles", Immutable.fromJS(action.payload));
     default:
       return state;

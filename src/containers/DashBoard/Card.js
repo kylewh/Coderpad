@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes }  from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import styledProps from 'styled-props'
 import { HoverTitle } from './HoverTitle'
 

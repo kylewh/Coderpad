@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   flex-basis: 55vw;
@@ -16,6 +16,6 @@ const Wrapper = styled.div`
     font-family: 'Inconsolata', monospace;
     line-height: 1.5;
   }
-`;
+`
 
-export default Wrapper;
+export default Wrapper

@@ -7,4 +7,3 @@ export {
   RadioSVG,
   NewsSVG
 }
-

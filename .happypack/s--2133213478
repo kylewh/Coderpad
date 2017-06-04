@@ -1,98 +1,27 @@
-/* REACT HOT LOADER */ if (module.hot) { (function () { var ReactHotAPI = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+SyntaxError: JSX attributes must only be assigned a non-empty expression (69:16)
 
-"use strict";
+[0m [90m 67 | [39m
+ [90m 68 | [39m  [36mreturn[39m (
+[31m[1m>[22m[39m[90m 69 | [39m    [33m<[39m[33mLI[39m onClick[33m=[39m{}[33m>[39m
+ [90m    | [39m                [31m[1m^[22m[39m
+ [90m 70 | [39m      [33m<[39m[33mspan[39m[33m>[39m{fileName}[33m<[39m[33m/[39m[33mspan[39m[33m>[39m
+ [90m 71 | [39m      [33m<[39m[33mDelete[39m [33m/[39m[33m>[39m
+ [90m 72 | [39m      [33m<[39m[33mDownload[39m onClick[33m=[39m{downloadFile} [33m/[39m[33m>[39m[0m
 
-exports.__esModule = true;
-
-var _templateObject = _taggedTemplateLiteralLoose(["\n  list-style: none;\n  padding: 1rem;\n  font-size: 1.6rem;\n  font-family: Roboto, sans-serif;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  &:hover {\n    background: #f5f5f5;\n  }\n  & span {\n    flex-grow: 1;\n  }\n  & svg {\n    cursor: pointer;\n    fill: #bdbdbd !important;\n  }\n  & svg:hover {\n    fill: #607d8b !important;\n  }\n  & input {\n    border: none!important;\n  }\n"], ["\n  list-style: none;\n  padding: 1rem;\n  font-size: 1.6rem;\n  font-family: Roboto, sans-serif;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  &:hover {\n    background: #f5f5f5;\n  }\n  & span {\n    flex-grow: 1;\n  }\n  & svg {\n    cursor: pointer;\n    fill: #bdbdbd !important;\n  }\n  & svg:hover {\n    fill: #607d8b !important;\n  }\n  & input {\n    border: none!important;\n  }\n"]),
-    _templateObject2 = _taggedTemplateLiteralLoose(["\n  align-items: flex-end;\n"], ["\n  align-items: flex-end;\n"]);
-
-var _react = require("react");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require("prop-types");
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _classnames = require("classnames");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _styledComponents = require("styled-components");
-
-var _styledComponents2 = _interopRequireDefault(_styledComponents);
-
-var _TextField = require("material-ui/TextField");
-
-var _TextField2 = _interopRequireDefault(_TextField);
-
-var _delete = require("material-ui/svg-icons/action/delete");
-
-var _delete2 = _interopRequireDefault(_delete);
-
-var _archive = require("material-ui/svg-icons/content/archive");
-
-var _archive2 = _interopRequireDefault(_archive);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _taggedTemplateLiteralLoose(strings, raw) { strings.raw = raw; return strings; }
-
-var LI = _styledComponents2.default.li(_templateObject);
-
-var Delete = (0, _styledComponents2.default)(_delete2.default)(_templateObject2);
-
-var FileItem = function FileItem(_ref) {
-  var fileName = _ref.fileName,
-      content = _ref.content;
-
-  var destroyClickedElement = function destroyClickedElement(event) {
-    document.body.removeChild(event.target);
-  };
-
-  var saveTextAsFile = function saveTextAsFile(text, filename) {
-    var textFileAsBlob = new Blob([text], { type: "text/plain" });
-    var downloadLink = document.createElement("a");
-    downloadLink.download = filename + ".md";
-    downloadLink.innerHTML = "Download File";
-    if (window.webkitURL != null) {
-      // Chrome allows the link to be clicked
-      // without actually adding it to the DOM.
-      downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-    } else {
-      // Firefox requires the link to be added to the DOM
-      // before it can be clicked.
-      downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-      downloadLink.onclick = destroyClickedElement;
-      downloadLink.style.display = "none";
-      document.body.appendChild(downloadLink);
-    }
-    downloadLink.click();
-  };
-
-  var downloadFile = function downloadFile() {
-    saveTextAsFile(content, fileName);
-  };
-
-  return _react2.default.createElement(
-    LI,
-    null,
-    _react2.default.createElement(
-      "span",
-      null,
-      fileName
-    ),
-    _react2.default.createElement(Delete, null),
-    _react2.default.createElement(_archive2.default, { onClick: downloadFile })
-  );
-};
-
-FileItem.propTypes = {
-  fileName: _propTypes2.default.string,
-  content: _propTypes2.default.string
-};
-
-exports.default = FileItem;
-
-/* REACT HOT LOADER */ }).call(this); } finally { if (module.hot) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "fileItem.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+Error
+    at transpile (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/babel-loader/lib/index.js:63:13)
+    at Object.module.exports (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/babel-loader/lib/index.js:163:20)
+    at applySyncOrAsync (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:341:21)
+    at apply (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:268:5)
+    at /Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:274:9
+    at /Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:330:17
+    at Object.callback (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/fnOncePedantic.js:10:15)
+    at Object.module.exports (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/eslint-loader/index.js:207:8)
+    at applySyncOrAsync (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:341:21)
+    at apply (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:268:5)
+    at /Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:131:7
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:184:14)
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:192:14)
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:192:14)
+    at applyPitchLoader (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:192:14)
+    at applyPitchLoaders (/Users/Kylewh/Desktop/playground/projects/coderPad/node_modules/happypack/lib/applyLoaders.js:222:4)

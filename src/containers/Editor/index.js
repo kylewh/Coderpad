@@ -27,34 +27,45 @@ class Editor extends Component {
   }
 
   componentWillMount() {
-    this._initHighLight();
+    // this._initHighLight();
+    this.props.loadLocalFiles();
   }
 
   componentDidMount() {
-    this.textarea.value = this.loadLocal()
-      ? this.loadLocal()
-      : this.props.textValue;
+    this.fillTextFromLocal();
     // Forced synchronization between state&LocalStorage
     this.props.editMarkdown(this.textarea.value);
   }
 
-  _initHighLight() {
-    const hlScript = document.createElement("script");
-    hlScript.type = "text/javascript";
-    hlScript.src =
-      "//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js";
-    document.getElementsByTagName("head")[0].appendChild(hlScript);
-    hlScript.onload = function() {
-      window.hljs.initHighlightingOnLoad();
-      console.log(
-        "%c HilghtJS initiaized",
-        "color: #8bc34a; font-weight: bold;"
-      );
-    };
-  }
+  // _initHighLight() {
+  //   const hlScript = document.createElement("script");
+  //   hlScript.type = "text/javascript";
+  //   hlScript.src =
+  //     "//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js";
+  //   document.getElementsByTagName("head")[0].appendChild(hlScript);
+  //   hlScript.onload = function() {
+  //     window.hljs.initHighlightingOnLoad();
+  //     console.log(
+  //       "%c HilghtJS initiaized",
+  //       "color: #8bc34a; font-weight: bold;"
+  //     );
+  //   };
+  // }
 
   loadLocal = () => {
     return localStorage.getItem("currentText");
+  };
+
+  fillTextFromLocal = () => {
+    this.textarea.value = this.loadLocal()
+      ? this.loadLocal()
+      : this.props.textValue;
+  };
+
+  setTextFromFileName = filename => {
+    this.textarea.value = localStorage.getItem(filename);
+    localStorage.setItem("currentText", this.textarea.value);
+    this.props.editMarkdown(this.textarea.value);
   };
 
   onChange = () => {
@@ -75,6 +86,7 @@ class Editor extends Component {
       isPreview,
       isSaving,
       savedFiles,
+      removeFile,
       textValue,
       isBrowsing,
       editMarkdown,
@@ -84,7 +96,7 @@ class Editor extends Component {
       toggleBrowse,
       saveNewFile
     } = this.props;
-
+    console.log(removeFile);
     const markdownCls = classNames({
       "hidden-toggle": isPreview || isBrowsing,
       markdown: true
@@ -135,8 +147,9 @@ class Editor extends Component {
         <BrowseFileModal
           isBrowsing={isBrowsing}
           toggleBrowse={toggleBrowse}
-          loadLocalFiles={loadLocalFiles}
-          savedFiles={savedFiles}
+          savedFiles={savedFiles.toJS()}
+          openFile={this.setTextFromFileName}
+          removeFile={removeFile}
         />
       </Wrapper>
     );
@@ -154,6 +167,7 @@ Editor.propTypes = {
   loadLocalFiles: PropTypes.func,
   toggleBrowse: PropTypes.func,
   saveNewFile: PropTypes.func,
+  removeFile: PropTypes.func,
   savedFiles: PropTypes.object
 };
 

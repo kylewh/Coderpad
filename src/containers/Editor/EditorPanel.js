@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import styled from "styled-components";
-import Preview from "material-ui/svg-icons/action/visibility";
-import Save from "material-ui/svg-icons/content/save";
-import File from "material-ui/svg-icons/file/folder-open";
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import styled from 'styled-components'
+import Preview from 'material-ui/svg-icons/action/visibility'
+import Save from 'material-ui/svg-icons/content/save'
+import File from 'material-ui/svg-icons/file/folder-open'
 
 const UL = styled.ul`
   position: fixed;
@@ -28,7 +28,7 @@ const UL = styled.ul`
   & svg.active {
     fill: #78909c !important;
   }
-`;
+`
 
 const EditorPanel = ({
   toggleBrowse,
@@ -38,17 +38,17 @@ const EditorPanel = ({
   isPreview,
   isSaving
 }) => {
-  const previewIconCls = classNames({ active: isPreview });
-  const saveIconCls = classNames({ active: isSaving });
-  const browseIconCls = classNames({ active: isBrowsing });
+  const previewIconCls = classNames({ active: isPreview })
+  const saveIconCls = classNames({ active: isSaving })
+  const browseIconCls = classNames({ active: isBrowsing })
   return (
     <UL>
       <Preview className={previewIconCls} onClick={togglePreview} />
       <Save className={saveIconCls} onClick={toggleSaveFile} />
       <File className={browseIconCls} onClick={toggleBrowse} />
     </UL>
-  );
-};
+  )
+}
 
 EditorPanel.propTypes = {
   toggleBrowse: PropTypes.func,
@@ -57,6 +57,6 @@ EditorPanel.propTypes = {
   isBrowsing: PropTypes.bool,
   isPreview: PropTypes.bool,
   isSaving: PropTypes.bool
-};
+}
 
-export default EditorPanel;
+export default EditorPanel

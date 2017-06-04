@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import styled from "styled-components";
-import TextField from "material-ui/TextField";
-import deleteBtn from "material-ui/svg-icons/action/delete";
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import styled from 'styled-components'
+import TextField from 'material-ui/TextField'
+import deleteBtn from 'material-ui/svg-icons/action/delete'
+import Download from 'material-ui/svg-icons/content/archive'
 
-import Download from "material-ui/svg-icons/content/archive";
 const LI = styled.li`
   list-style: none;
   padding: 1rem;
@@ -18,6 +18,7 @@ const LI = styled.li`
     background: #f5f5f5;
   }
   & span {
+    cursor: pointer;
     flex-grow: 1;
   }
   & svg {
@@ -30,53 +31,71 @@ const LI = styled.li`
   & input {
     border: none!important;
   }
-`;
+`
 
 const Delete = styled(deleteBtn)`
   align-items: flex-end;
-`;
+`
 
-const FileItem = ({ fileName, content }) => {
+const FileItem = ({
+  fileName,
+  content,
+  openFile,
+  toggleBrowse,
+  removeFile
+}) => {
+  const unPrefixFileName = fileName.substr(9)
+
   const destroyClickedElement = event => {
-    document.body.removeChild(event.target);
-  };
+    document.body.removeChild(event.target)
+  }
 
   const saveTextAsFile = (text, filename) => {
-    var textFileAsBlob = new Blob([text], { type: "text/plain" });
-    var downloadLink = document.createElement("a");
-    downloadLink.download = filename + ".md";
-    downloadLink.innerHTML = "Download File";
+    var textFileAsBlob = new Blob([text], { type: 'text/plain' })
+    var downloadLink = document.createElement('a')
+    downloadLink.download = filename + '.md'
+    downloadLink.innerHTML = 'Download File'
     if (window.webkitURL != null) {
       // Chrome allows the link to be clicked
       // without actually adding it to the DOM.
-      downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+      downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob)
     } else {
       // Firefox requires the link to be added to the DOM
       // before it can be clicked.
-      downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-      downloadLink.onclick = destroyClickedElement;
-      downloadLink.style.display = "none";
-      document.body.appendChild(downloadLink);
+      downloadLink.href = window.URL.createObjectURL(textFileAsBlob)
+      downloadLink.onclick = destroyClickedElement
+      downloadLink.style.display = 'none'
+      document.body.appendChild(downloadLink)
     }
-    downloadLink.click();
-  };
+    downloadLink.click()
+  }
 
   const downloadFile = () => {
-    saveTextAsFile(content, fileName);
-  };
+    saveTextAsFile(content, unPrefixFileName)
+  }
 
   return (
     <LI>
-      <span>{fileName}</span>
-      <Delete />
+      <span
+        onClick={() => {
+          openFile(fileName)
+          toggleBrowse()
+        }}
+      >
+        {unPrefixFileName}
+      </span>
+      <Delete onClick={() => removeFile(fileName)} />
       <Download onClick={downloadFile} />
     </LI>
-  );
-};
+  )
+}
 
 FileItem.propTypes = {
   fileName: PropTypes.string,
-  content: PropTypes.string
-};
+  content: PropTypes.string,
+  openFile: PropTypes.func,
+  toggleBrowse: PropTypes.func,
+  removeFile: PropTypes.func
+}
 
-export default FileItem;
+export default FileItem

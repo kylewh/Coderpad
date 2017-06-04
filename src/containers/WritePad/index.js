@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Editor from '../Editor/'
-import Container from './Container'
+import Container from '../../components/Container'
 
 class WritePad extends Component {
   render () {

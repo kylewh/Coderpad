@@ -9,7 +9,7 @@ const routeInitialState = fromJS({
 /**
  * Merge route into the global application state
  */
-function routeReducer(state = routeInitialState, action) {
+function routeReducer (state = routeInitialState, action) {
   switch (action.type) {
     case LOCATION_CHANGE:
       return state.merge({
@@ -20,7 +20,7 @@ function routeReducer(state = routeInitialState, action) {
   }
 }
 
-export default function createAppReducer() {
+export default function createAppReducer () {
   return combineReducers({
     route: routeReducer,
     global: globalReducer
