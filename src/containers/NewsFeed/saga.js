@@ -98,7 +98,7 @@ const fetchV2exTopic = id => {
   return axios
     .get(url)
     .then(res => {
-      ret.topicInfo = res.data[0];
+      ret.topicInfo = res.data;
       return axios.get(repliesUrl);
     })
     .then(res => {

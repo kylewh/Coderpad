@@ -15,32 +15,32 @@ app.use(AV.express());
 app.use(express.static(path.resolve(__dirname, "./dist")));
 
 const V2EX_BASE_URL = "https://www.v2ex.com/api";
-// v2ex topic
-app.get("/news/v2ex/topics/show.json?", function(req, res) {
-  const ret = {
-    topicInfo: {},
-    replies: []
-  };
-  let url = "", repliesUrl = "";
 
+// v2ex topic info
+app.get("/news/v2ex/topics/show.json?", function(req, response) {
+  let url = "", repliesUrl = "";
   if (req.query.id) {
     const id = req.query.id;
     url = `${V2EX_BASE_URL}/topics/show.json?id=${id}`;
-    repliesUrl = `${V2EX_BASE_URL}/replies/show.json?topic_id=${id}`;
-    axios
-      .get(url)
-      .then(res => {
-        ret.topicInfo = res.data[0];
-        return axios.get(repliesUrl);
-      })
-      .then(res => {
-        ret.replies = res.data;
-      })
-      .then(() => res.send(ret));
+    axios.get(url).then(res => {
+      response.send(res.data[0]);
+    });
   } else if (req.query["node_name"]) {
     const contentType = req.query["node_name"];
     url = `${V2EX_BASE_URL}/topics/show.json?node_name=${contentType}`;
-    axios.get(url).then(response => res.send(response.data));
+    axios.get(url).then(res => response.send(res.data));
+  }
+});
+
+// v2ex topic replies
+app.get("/news/v2ex/replies/show.json?", function(req, response) {
+  let repliesUrl = "";
+  if (req.query["topic_id"]) {
+    const id = req.query["topic_id"];
+    repliesUrl = `${V2EX_BASE_URL}/replies/show.json?topic_id=${id}`;
+    axios.get(repliesUrl).then(res => {
+      response.send(res.data);
+    });
   }
 });
 
@@ -56,7 +56,7 @@ app.get("/news/v2ex/topics/latest.json", function(req, res) {
   axios.get(url).then(response => res.send(response.data));
 });
 
-app.use("^(?!.*?topics).*$", (req, res) => {
+app.use("^(?!.*?topics)(?!.*?replies).*$", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./dist/index.html"));
 });
 // app.listen(process.env.LEANCLOUD_APP_PORT);
