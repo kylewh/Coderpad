@@ -1,33 +1,33 @@
-/* eslint-disable */
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import Card from './Card'
-import { IdeaSVG, RadioSVG, NewsSVG } from './SvgIcons/'
-import NormalLink from '../../components/NormalLink'
-import Container from './Container'
+import React, { PureComponent } from "react";
+/** Child Components */
+import { IdeaSVG, RadioSVG, NewsSVG } from "./SvgIcons/";
+/** Styled Components */
+import Card from "./styled/Card";
+import Container from "./styled/Container";
+import NormalLink from "./styled/NormalLink";
 
-class DashBoard extends Component {
-  render () {
+class DashBoard extends PureComponent {
+  render() {
     return (
-      <Container className='Board' >
-        <NormalLink to='/write'>
-          <Card idea className='card'>
-            <IdeaSVG/>
+      <Container className="Board">
+        <NormalLink to="/write">
+          <Card idea className="card">
+            <IdeaSVG />
           </Card>
         </NormalLink>
-        <NormalLink to='/news'>
-          <Card news >
-            <NewsSVG/>
+        <NormalLink to="/news">
+          <Card news>
+            <NewsSVG />
           </Card>
         </NormalLink>
-        <NormalLink to='/music'>
+        <NormalLink to="/music">
           <Card radio>
-            <RadioSVG/>
+            <RadioSVG />
           </Card>
         </NormalLink>
       </Container>
-    )
+    );
   }
 }
 
-export default DashBoard
+export default DashBoard;

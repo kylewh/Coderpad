@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { makeSelectGithub } from '../selector'
 import ContentLoader from 'react-content-loader'
-import Repo from './Repo'
+import Repo from './components/Repo'
 import UL from './styled/UL'
 
 class Github extends Component {

@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import Editor from '../Editor/'
-import Container from '../../components/Container'
+import React, { Component } from "react";
+import Editor from "../Editor/";
+import Container from "./styled/Container";
 
 class WritePad extends Component {
-  render () {
+  render() {
     return (
       <Container>
         <Editor />
       </Container>
-    )
+    );
   }
 }
 
-export default WritePad
+export default WritePad;

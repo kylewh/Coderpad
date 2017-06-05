@@ -1,51 +1,23 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Route, Link, Switch } from "react-router-dom";
+/** Actions && Selectors */
+import { makeSelectV2exTopics, makeSelectV2exHot } from "../selector";
+/** Tools */
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { makeSelectV2exTopics, makeSelectV2exHot } from "../selector";
 /** Child Components */
-import Hot from "./Hot";
-import Main from "./Main";
-import UserInfo from "./UserInfo";
-import Topic from "./Topic";
+import Hot from "./components/Hot";
+import Main from "./components/Main";
+import UserInfo from "./components/UserInfo";
+import Topic from "./components/Topic";
+/** Third Party Components */
 import ContentLoader from "react-content-loader";
 /** Styled Components */
-import Container from "./styled/Container";
 import Row from "./styled/Row";
-
-const NoPaddingXS = styled.div`
-  position: relative;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
-`;
-
-const MainWrapper = styled(NoPaddingXS)`
-  @media all and (min-width: 992px) {
-    width: 75%;
-    float: left;
-  }
-`;
-
-const SideWrapper = styled(NoPaddingXS)`
-  @media all and (min-width: 992px) {
-    width: 25%;
-    float: left;
-  }
-`;
-
-const Background = styled.div`
-    background: #e2e2e2;
-    padding-top: 20px;
-    flex-grow: 1;
-    heigth: auto;
-    &:before {
-      display: table;
-      content: " ";
-    }
-
-`;
+import Container from "./styled/Container";
+import Background from "./styled/Background";
+import NoPaddingXS from "./styled/NoPaddingXS";
 
 class V2EX extends PureComponent {
   static propTypes = {
@@ -54,6 +26,20 @@ class V2EX extends PureComponent {
   };
 
   render() {
+    const MainWrapper = styled(NoPaddingXS)`
+      @media all and (min-width: 992px) {
+        width: 75%;
+        float: left;
+      }
+    `;
+
+    const SideWrapper = styled(NoPaddingXS)`
+      @media all and (min-width: 992px) {
+        width: 25%;
+        float: left;
+      }
+    `;
+
     return (
       <Background className="clearfix">
         <Container className="clearfix">

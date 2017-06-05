@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+/** Actions && Selectors */
+import * as editorActions from "./action";
 import {
   makeSelectTextValue,
   makeSelectIsPreview,
@@ -7,18 +9,21 @@ import {
   makeSelectIsBrowsing,
   makeSelectSavedFiles
 } from "./selector";
-import * as editorActions from "./action";
+/** Tool */
 import debounce from "lodash/debounce";
 import marked from "marked";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Wrapper from "./Wrapper";
-import AutoSizeTextarea from "./Textarea";
-import EditorPanel from "./EditorPanel";
+/** Styled Components */
+import AutoSizeTextarea from "./styled/Textarea";
+import Wrapper from "./styled/Wrapper";
+/** Child Components */
+import EditorPanel from "./components/EditorPanel";
+import SaveFileModal from "./components/SaveFileModal";
+import BrowseFileModal from "./components/BrowseFileModal";
+/** Material Components */
 import Preview from "material-ui/svg-icons/action/visibility";
 import Save from "material-ui/svg-icons/content/archive";
-import SaveFileModal from "./SaveFileModal";
-import BrowseFileModal from "./browseFileModal";
 
 class Editor extends Component {
   constructor(props) {
@@ -36,6 +41,13 @@ class Editor extends Component {
     // Forced synchronization between state&LocalStorage
     this.props.editMarkdown(this.textarea.value);
   }
+
+  /**
+   * Doesn't work completely.
+   * Cannot find out proper method yet.
+   * @TODO: I want syntax highlighting !
+   * So just ignore it.. fold these shit...
+   */
 
   // _initHighLight() {
   //   const hlScript = document.createElement("script");
@@ -96,7 +108,7 @@ class Editor extends Component {
       toggleBrowse,
       saveNewFile
     } = this.props;
-    console.log(removeFile);
+
     const markdownCls = classNames({
       "hidden-toggle": isPreview || isBrowsing,
       markdown: true
@@ -110,7 +122,6 @@ class Editor extends Component {
     const browseCls = classNames({
       "hidden-toggle": !isBrowsing
     });
-
     return (
       <Wrapper>
         {/* Markdown -Editor */}

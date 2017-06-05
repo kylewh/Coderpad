@@ -4,7 +4,14 @@
   "description": "Newsly Application built with react&redux",
   "main": "./src/index.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --colors --hot"
+    "start": "node server.js",
+    "dev": "webpack-dev-server --inline --progress --colors --hot",
+    "clean": "rimraf dist",
+    "build": "npm run clean && webpack -p"
+  },
+  "engines": {
+    "node": "7.6.0",
+    "npm": "4.1.2"
   },
   "keywords": [
     "react",
@@ -26,20 +33,18 @@
     "babel-polyfill": "^6.23.0",
     "caniuse-api": "^1.6.1",
     "classnames": "^2.2.5",
+    "express": "^4.15.3",
     "history": "^4.6.1",
     "immutable": "^3.8.1",
-    "localforage": "^1.5.0",
+    "leanengine": "^2.0.3",
     "lodash": "^4.17.4",
     "marked": "^0.3.6",
     "material-ui": "^0.18.0",
     "moment": "^2.18.1",
-    "node-uuid": "^1.4.8",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-back2top": "^0.1.5",
     "react-dom": "^15.5.4",
-    "react-immutable-proptypes": "^2.1.0",
-    "react-marked-markdown": "^1.4.2",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
@@ -75,6 +80,7 @@
     "node-sass": "^4.5.3",
     "react-content-loader": "^1.3.1",
     "react-hot-loader": "^1.3.1",
+    "rimraf": "^2.6.1",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.17.0",
     "webpack": "^2.5.1",

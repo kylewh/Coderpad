@@ -2,7 +2,7 @@ import Immutable from "immutable";
 import { createSelector } from "reselect";
 import { combineReducers } from "redux-immutable";
 import * as actionTypes from "../App/constant";
-/** Reducer */
+/** Child Reducers */
 import ambientSound from "../Embient/reducer";
 
 // Initialization content
@@ -34,9 +34,7 @@ const editor = (state = initialState, action) => {
     case actionTypes.EDIT_MARKDOWN:
       return state.set("textValue", action.payload);
     case actionTypes.SAVE_NEWFILE:
-      return state.setIn(["savedFiles", action.name], {
-        textValue: action.textValue
-      });
+      return state.setIn(["savedFiles", action.name], action.textValue);
     case actionTypes.REMOVE_FILE:
       return state.deleteIn(["savedFiles", action.name]);
     case actionTypes.LOAD_LOCALFILES:
