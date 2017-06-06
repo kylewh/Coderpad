@@ -23,11 +23,35 @@ const HotPanel = styled(Panel)`
 class Hot extends Component {
   static propTypes = {
     hotTopics: PropTypes.array,
-    loadV2exTopics: PropTypes.func
+    loadHotTopics: PropTypes.func
   };
 
   componentDidMount() {
-    this.props.loadV2exTopics("hot");
+    console.log("rerender");
+    this.props.loadHotTopics();
+  }
+
+  checkArrayEqual(arr1, arr2) {
+    arr1.forEach((hotTopic, idx) => {
+      if (hotTopic.content !== arr2[idx].content) {
+        return false;
+      }
+    });
+    return true;
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (
+      this.props.hotTopics.length &&
+      this.checkArrayEqual(this.props.hotTopics, nextProps.hotTopics)
+    ) {
+      console.log(
+        "%c Hot Topics remain unchanged",
+        "color: #2196f3; font-weight: lighter; font-size: 20px"
+      );
+      return false;
+    }
+    return true;
   }
 
   render() {
@@ -52,8 +76,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadV2exTopics: contentType =>
-    dispatch({ type: "LOAD_V2EX_TOPICS", contentType })
+  loadHotTopics: () => dispatch({ type: "LOAD_V2EX_HOT" })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Hot);

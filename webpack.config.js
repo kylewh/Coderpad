@@ -20,7 +20,7 @@ module.exports = {
     app: "./src/index.js",
     vendor: Object.keys(pkg.dependencies)
   },
-  devtool: "cheap-module-source-map",
+  // devtool: "cheap-module-source-map",
   output: {
     // // filename: "[name].[chunkhash].js",
     // filename: "bundle.js",

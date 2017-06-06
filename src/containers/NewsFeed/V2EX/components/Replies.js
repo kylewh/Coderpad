@@ -22,7 +22,7 @@ class Replies extends PureComponent {
         <PBody>
           {this.props.replies.length
             ? this.props.replies.map(reply => (
-                <ReplyItem reply={reply} key={reply.id} />
+                <ReplyItem reply={reply.toJS()} key={reply.toJS().id} />
               ))
             : ""}
         </PBody>

@@ -56,7 +56,14 @@ app.get("/news/v2ex/topics/latest.json", function(req, res) {
   axios.get(url).then(response => res.send(response.data));
 });
 
-app.use("^(?!.*?topics)(?!.*?replies).*$", (req, res) => {
+// app.use(
+//   "^(?!.*?topics)(?!.*?replies)(?!.*?vendor)(?!.*?app)(?!.*?manifest).*$",
+//   (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "./dist/index.html"));
+//   }
+// );
+
+app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./dist/index.html"));
 });
 // app.listen(process.env.LEANCLOUD_APP_PORT);

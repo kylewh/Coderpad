@@ -14,8 +14,8 @@ const wrapApiKey = "vZpCx0QXD65gAcUD4Q7gAL6y0GQB1pgT";
 const GITHUB_BASE_URL =
   "https://wrapapi.com/use/sunnysingh/github/trending/0.0.4?wrapAPIKey=" +
   wrapApiKey;
-// const V2EX_BASE_URL = "https://www.v2ex.com/api";
-const V2EX_BASE_URL = "/news/v2ex";
+const V2EX_BASE_URL = "https://www.v2ex.com/api";
+//const V2EX_BASE_URL = "/news/v2ex";
 
 /**
  * 30 top stories from hackerNews
@@ -47,10 +47,7 @@ const fetchHackerNews = () => {
         });
       });
     })
-    .then(() => {
-      console.log("resolved data");
-      return data;
-    });
+    .then(() => data);
 };
 
 function* loadHackerNewsData() {
@@ -94,17 +91,18 @@ const fetchV2exTopic = id => {
   const ret = { topicInfo: {}, replies: [] };
   let url = `${V2EX_BASE_URL}/topics/show.json?id=${id}`,
     repliesUrl = `${V2EX_BASE_URL}/replies/show.json?topic_id=${id}`;
-  console.log(url);
   return axios
     .get(url)
     .then(res => {
-      ret.topicInfo = res.data;
+      ret.topicInfo = res.data[0];
       return axios.get(repliesUrl);
     })
     .then(res => {
       ret.replies = res.data;
     })
-    .then(() => ret);
+    .then(() => {
+      return ret;
+    });
 };
 
 function* loadV2exTopic({ id }) {
@@ -119,9 +117,6 @@ function* loadV2exTopic({ id }) {
 const fetchV2exTopics = contentType => {
   let url = "";
   switch (contentType) {
-    case "hot":
-      url = `${V2EX_BASE_URL}/topics/hot.json`;
-      break;
     case "latest":
       url = `${V2EX_BASE_URL}/topics/latest.json`;
       break;
@@ -129,7 +124,6 @@ const fetchV2exTopics = contentType => {
       url = `${V2EX_BASE_URL}/topics/show.json?node_name=${contentType}`;
       break;
   }
-  console.log(`fetch url: ${url}`);
   return axios.get(url).then(res => res.data);
 };
 
@@ -145,12 +139,29 @@ function* loadV2exTopics({ contentType }) {
   }
 }
 
-function* loadV2exHot({ contentType }) {
+// function* loadV2exHot({ contentType }) {
+//   try {
+//     let topics = yield call(fetchV2exHot, contentType);
+//     yield put({
+//       type: "FETCH_V2EX_TOPICS_SUCCESS",
+//       payload: { topics, contentType }
+//     });
+//   } catch (error) {
+//     yield put({ type: "FETCH_FAILED", error });
+//   }
+// }
+
+const fetchV2exHot = () => {
+  let url = `${V2EX_BASE_URL}/topics/hot.json`;
+  return axios.get(url).then(res => res.data);
+};
+
+function* loadV2exHot() {
   try {
-    let topics = yield call(fetchV2exHot, contentType);
+    let topics = yield call(fetchV2exHot);
     yield put({
-      type: "FETCH_V2EX_TOPICS_SUCCESS",
-      payload: { topics, contentType } // LOL~ so we can know whether it's hot or normal topics
+      type: "FETCH_V2EX_HOT_SUCCESS",
+      payload: { topics }
     });
   } catch (error) {
     yield put({ type: "FETCH_FAILED", error });
@@ -162,7 +173,7 @@ export function* watchLoadV2exTopic() {
 }
 
 export function* watchLoadV2exTopics() {
-  yield takeEvery("LOAD_V2EX_TOPICS", loadV2exTopics);
+  yield takeLatest("LOAD_V2EX_TOPICS", loadV2exTopics);
 }
 
 export function* watchLoadV2exHot() {

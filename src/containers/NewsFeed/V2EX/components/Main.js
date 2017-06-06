@@ -39,7 +39,6 @@ class Main extends Component {
           <Tab className="tab" to="?tab=create">分享创造</Tab>
           <Tab className="tab" to="?tab=nodejs">Node.js</Tab>
           <Tab className="tab" to="?tab=jobs">酷工作</Tab>
-          <Tab className="tab" to="?tab=hot">最热</Tab>
           <Tab className="tab" to="?tab=latest">最新</Tab>
         </PHeading>
         <PBody className="panel-body">

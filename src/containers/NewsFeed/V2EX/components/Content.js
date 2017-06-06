@@ -21,7 +21,14 @@ class Content extends PureComponent {
     topic: PropTypes.object
   };
   render() {
-    const { member, node, title, created, content_rendered } = this.props.topic;
+    const {
+      id,
+      member,
+      node,
+      title,
+      created,
+      content_rendered
+    } = this.props.topic.toJS();
 
     const TopicHead = styled(PHeading)`
       font-size: 14px;
@@ -45,11 +52,11 @@ class Content extends PureComponent {
         max-width: 100%;
       }
     `;
-
+    console.log(this.props.topic.toJS());
     return (
       <div>
-        {this.props.topic &&
-          this.props.topic.id &&
+        {this.props.topic.toJS() &&
+          id &&
           <Panel>
             <TopicHead>
               <div style={{ float: "right", textAlign: "right" }}>
@@ -92,7 +99,7 @@ class Content extends PureComponent {
               <a href="#" className="pf">感谢</a>
             </PFooter>
           </Panel>}
-        {!this.props.topic.id &&
+        {!id &&
           <ContentLoader
             type="facebook"
             style={{ alignSelf: "flex-start", width: "50vw" }}
