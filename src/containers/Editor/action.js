@@ -21,10 +21,6 @@ const saveNewFile = (name, textValue) => {
   let finalName = 'coderPad-' + name
 
   localStorage.setItem(finalName, textValue)
-  const payload = {
-    name,
-    textValue
-  }
 
   return {
     type: actionTypes.SAVE_NEWFILE,

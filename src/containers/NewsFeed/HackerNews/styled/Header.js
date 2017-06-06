@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Header = styled.h2`
     margin: 0;
@@ -8,6 +8,6 @@ const Header = styled.h2`
     word-break: break-all;
     word-break: break-word;
     hyphens: auto;
-`;
+`
 
-export default Header;
+export default Header

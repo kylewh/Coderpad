@@ -46,18 +46,18 @@ module.exports = {
       {
         test: /\.jsx|js?$/,
         exclude: /node_modules/,
-        loaders: ["happypack/loader?id=buildStuff"]
-        // loaders: ["react-hot-loader", "babel-loader"] //"eslint-loader"
+        // loaders: ["happypack/loader?id=buildStuff"]
+        loaders: ["react-hot-loader", "babel-loader"] //"eslint-loader"
       },
       {
         test: /\.css$/,
-        loaders: ["happypack/loader?id=css"]
-        // loaders: ["style-loader", "css-loader"]
+        // loaders: ["happypack/loader?id=css"]
+         loaders: ["style-loader", "css-loader"]
       },
       {
         test: /\.scss$/,
-        loaders: ["happypack/loader?id=scss"]
-        // loaders: ["style-loader", "css-loader", "sass-loader"]
+        // loaders: ["happypack/loader?id=scss"]
+        loaders: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
   },
@@ -69,25 +69,20 @@ module.exports = {
       filename: "./index.html",
       title: "CoderPad"
     }),
-    // new webpack.DefinePlugin({
-    //   "process.env": {
-    //     NODE_ENV: JSON.stringify("production")
-    //   }
-    // }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ["vendor", "manifest"]
     }),
-    new HappyPack({
-      id: "buildStuff",
-      loaders: ["react-hot-loader", "babel-loader", "eslint-loader"]
-    }),
-    new HappyPack({
-      id: "css",
-      loaders: ["style-loader", "css-loader"]
-    }),
-    new HappyPack({
-      id: "scss",
-      loaders: ["style-loader", "css-loader", "sass-loader"]
-    })
+    // new HappyPack({
+    //   id: "buildStuff",
+    //   loaders: ["react-hot-loader", "babel-loader", "eslint-loader"]
+    // }),
+    // new HappyPack({
+    //   id: "css",
+    //   loaders: ["style-loader", "css-loader"]
+    // }),
+    // new HappyPack({
+    //   id: "scss",
+    //   loaders: ["style-loader", "css-loader", "sass-loader"]
+    // })
   ]
 };

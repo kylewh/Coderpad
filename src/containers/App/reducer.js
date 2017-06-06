@@ -1,4 +1,3 @@
-import { fromJS } from 'immutable'
 import { combineReducers } from 'redux-immutable'
 import writePad from '../WritePad/reducer'
 import newsFeed from '../NewsFeed/reducer'

@@ -1,6 +1,5 @@
 import React from 'react'
 import SvgIcon from 'material-ui/SvgIcon'
-import PropTypes from 'prop-types'
 
 export const HackerNewsIcon = () => (
   <SvgIcon viewBox='0 0 256 256'>

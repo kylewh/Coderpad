@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const A = styled.a`
   &:not([type=button]) {
@@ -8,6 +8,6 @@ const A = styled.a`
   &:visited {
     color: #555;
   }
-`;
+`
 
-export default A;
+export default A

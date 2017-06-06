@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Background = styled.div`
     background: #e2e2e2;
@@ -9,6 +9,6 @@ const Background = styled.div`
       display: table;
       content: " ";
     }
-`;
+`
 
-export default Background;
+export default Background

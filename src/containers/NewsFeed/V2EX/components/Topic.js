@@ -21,6 +21,7 @@ class Topic extends Component {
   componentWillMount() {
     this.props.cleanCache();
   }
+  
   componentDidMount() {
     this.props.loadV2exTopic(this.props.match.params.id);
   }

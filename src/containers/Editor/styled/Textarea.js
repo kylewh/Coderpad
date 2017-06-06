@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import Textarea from "react-textarea-autosize";
+import React from 'react'
+import styled from 'styled-components'
+import Textarea from 'react-textarea-autosize'
 
 const AutoSizeTextarea = styled(Textarea)`
   outline: none;
@@ -9,6 +9,6 @@ const AutoSizeTextarea = styled(Textarea)`
   & ul, & ol {
     list-style: initial;
   }
-`;
+`
 
-export default AutoSizeTextarea;
+export default AutoSizeTextarea

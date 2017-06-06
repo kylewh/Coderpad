@@ -16,6 +16,29 @@ import Chevron from "../styled/Chevron";
 import H1 from "../styled/H1";
 import { CardBody, TopicCardBody } from "../styled/Cards";
 
+const TopicHead = styled(PHeading)`
+  font-size: 14px;
+  line-height: 120%;
+`;
+
+const HeadBody = styled(TopicCardBody)`
+  text-align: left;
+`;
+
+const TopicTitle = styled(H1)`
+  font-size: 24px;
+  font-weight: 400;
+  margin-top: 12px;
+  margin-bottom: 8px;
+`;
+
+const TopicContent = styled(MarkDown)`
+  padding: 10px;
+  & span img {
+    max-width: 100%;
+  }
+`;
+
 class Content extends PureComponent {
   static propTypes = {
     topic: PropTypes.object
@@ -30,29 +53,6 @@ class Content extends PureComponent {
       content_rendered
     } = this.props.topic.toJS();
 
-    const TopicHead = styled(PHeading)`
-      font-size: 14px;
-      line-height: 120%;
-    `;
-
-    const HeadBody = styled(TopicCardBody)`
-      text-align: left;
-    `;
-
-    const TopicTitle = styled(H1)`
-      font-size: 24px;
-      font-weight: 400;
-      margin-top: 12px;
-      margin-bottom: 8px;
-    `;
-
-    const TopicContent = styled(MarkDown)`
-      padding: 10px;
-      & span img {
-        max-width: 100%;
-      }
-    `;
-    console.log(this.props.topic.toJS());
     return (
       <div>
         {this.props.topic.toJS() &&

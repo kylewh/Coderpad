@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const LI = styled.li`
   display: flex;
@@ -8,6 +8,6 @@ const LI = styled.li`
   @media all and (max-width:768px) {
     flex-direction: column;
   }
-`;
+`
 
-export default LI;
+export default LI

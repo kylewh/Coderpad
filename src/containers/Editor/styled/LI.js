@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const LI = styled.li`
   list-style: none;
@@ -25,6 +25,6 @@ const LI = styled.li`
   & input {
     border: none!important;
   }
-`;
+`
 
-export default LI;
+export default LI

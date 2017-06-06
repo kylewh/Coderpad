@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   flex-basis: 55vw;
@@ -17,6 +17,6 @@ const Wrapper = styled.div`
     line-height: 1.5;
     overflow-x: hidden;
   }
-`;
+`
 
-export default Wrapper;
+export default Wrapper

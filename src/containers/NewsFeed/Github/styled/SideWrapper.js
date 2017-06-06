@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const SideWrapper = styled.div`
   display: flex;
@@ -6,6 +6,6 @@ const SideWrapper = styled.div`
     flex-direction: row-reverse;
     justify-content: flex-end;
   }
-`;
+`
 
-export default SideWrapper;
+export default SideWrapper

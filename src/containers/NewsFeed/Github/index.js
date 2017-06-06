@@ -8,10 +8,6 @@ import Repo from './components/Repo'
 import UL from './styled/UL'
 
 class Github extends Component {
-  constructor (props) {
-    super(props)
-  }
-
   componentDidMount () {
     this.props.loadGithub()
   }

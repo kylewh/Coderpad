@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Wrapper = styled.li`
   list-style: none;
@@ -11,6 +11,6 @@ const Wrapper = styled.li`
   &:hover {
     background-position: -100%;
   }
-`;
+`
 
-export default Wrapper;
+export default Wrapper

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const DescriptionWrapper = styled.div`
   box-sizing: border-box;
@@ -7,6 +7,6 @@ const DescriptionWrapper = styled.div`
   @media all and (max-width:768px) {
     width: 100%;
   }
-`;
+`
 
-export default DescriptionWrapper;
+export default DescriptionWrapper

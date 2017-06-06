@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components'
-import styledProps from 'styled-props'
 
 const rubberBand = keyframes`
   0% {

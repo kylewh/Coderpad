@@ -1,33 +1,33 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react'
 /** Child Components */
-import { IdeaSVG, RadioSVG, NewsSVG } from "./SvgIcons/";
+import { IdeaSVG, RadioSVG, NewsSVG } from './SvgIcons/'
 /** Styled Components */
-import Card from "./styled/Card";
-import Container from "./styled/Container";
-import NormalLink from "./styled/NormalLink";
+import Card from './styled/Card'
+import Container from './styled/Container'
+import NormalLink from './styled/NormalLink'
 
 class DashBoard extends PureComponent {
-  render() {
+  render () {
     return (
-      <Container className="Board">
-        <NormalLink to="/write">
-          <Card idea className="card">
+      <Container className='Board'>
+        <NormalLink to='/write'>
+          <Card idea className='card'>
             <IdeaSVG />
           </Card>
         </NormalLink>
-        <NormalLink to="/news">
+        <NormalLink to='/news'>
           <Card news>
             <NewsSVG />
           </Card>
         </NormalLink>
-        <NormalLink to="/music">
+        <NormalLink to='/music'>
           <Card radio>
             <RadioSVG />
           </Card>
         </NormalLink>
       </Container>
-    );
+    )
   }
 }
 
-export default DashBoard;
+export default DashBoard

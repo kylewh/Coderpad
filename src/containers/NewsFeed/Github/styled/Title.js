@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Title = styled.h2`
   & a {
@@ -9,5 +9,5 @@ const Title = styled.h2`
     margin-bottom: 1rem;
     text-decoration: none;
   }
-`;
-export default Title;
+`
+export default Title

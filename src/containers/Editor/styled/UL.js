@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const UL = styled.ul`
   position: fixed;
@@ -22,6 +22,6 @@ const UL = styled.ul`
   & svg.active {
     fill: #78909c !important;
   }
-`;
+`
 
-export default UL;
+export default UL

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const SideItem = styled.div`
   cursor: default;
@@ -10,6 +10,6 @@ const SideItem = styled.div`
   @media all and (max-width:768px) {
     text-align: left;
   }
-`;
+`
 
-export default SideItem;
+export default SideItem
