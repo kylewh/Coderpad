@@ -25,8 +25,7 @@ module.exports = {
     // // filename: "[name].[chunkhash].js",
     // filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].js",
-    chunkFilename: "[name]-[chunkhash].js"
+    filename: "[name]-[chunkhash].js"
   },
   devServer: {
     historyApiFallback: true,
@@ -52,7 +51,7 @@ module.exports = {
       {
         test: /\.css$/,
         // loaders: ["happypack/loader?id=css"]
-         loaders: ["style-loader", "css-loader"]
+        loaders: ["style-loader", "css-loader"]
       },
       {
         test: /\.scss$/,
@@ -62,7 +61,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    //new webpack.HotModuleReplacementPlugin(),
     new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       template: "./index.html",
@@ -71,7 +70,7 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ["vendor", "manifest"]
-    }),
+    })
     // new HappyPack({
     //   id: "buildStuff",
     //   loaders: ["react-hot-loader", "babel-loader", "eslint-loader"]
