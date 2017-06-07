@@ -11,7 +11,7 @@ import NavLink from "./NavLink";
 class Header extends PureComponent {
   // if we don't receive location as paramter, the PureComponent's shouldComponnetUpdate will block the actual location change, so the NavLink won't work correctly
   static propTypes = {
-    location: PropTypes.func
+    location: PropTypes.object
   };
   render() {
     return (

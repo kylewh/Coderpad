@@ -97,7 +97,7 @@ const fetchV2exTopic = id => {
     })
 }
 
-function * loadV2exTopic ({ id }) {
+function * loadV2exTopic (id) {
   try {
     let topic = yield call(fetchV2exTopic, id)
     yield put({ type: 'FETCH_V2EX_TOPIC_SUCCESS', payload: topic })
@@ -178,8 +178,10 @@ export function * watchLoadHackerNews () {
 }
 
 export function * watchV2exTopic () {
-  while (yield take('LOAD_V2EX_TOPIC')) {
-    const v2exTopicTask = yield fork(loadV2exTopic)
+  let action
+  while (action = yield take('LOAD_V2EX_TOPIC')) {
+    console.log(action.id)
+    const v2exTopicTask = yield fork(loadV2exTopic, action.id)
     yield take('STOP_FETCH')
     console.log('cancel')
     yield cancel(v2exTopicTask)
