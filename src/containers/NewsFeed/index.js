@@ -1,6 +1,6 @@
-/* eslint-disable */
 import React, { PureComponent } from "react";
-import { Route, Switch, Link, Redirect } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
+/** Tools */
 import PropTypes from "prop-types";
 /** Styled Components */
 import Container from "./styled/Container";
@@ -15,15 +15,15 @@ import GoTop from "./components/GoTop";
 
 class NewsFeed extends PureComponent {
   static propTypes = {
+    location: PropTypes.object,
     match: PropTypes.object
   };
   render() {
     const { match } = this.props;
     return (
       <Container>
-        <Header />
+        <Header location={this.props.location} />
         <GoTop style={{ zIndex: 1000 }} />
-        <Redirect to={`${match.url}/v2ex`} />
         <Route path={`${match.url}/hackernews`} component={HackerNews} />
         <Route path={`${match.url}/github`} component={Github} />
         <Route path={`${match.url}/v2ex`} component={V2EX} />

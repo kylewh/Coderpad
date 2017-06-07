@@ -17,12 +17,13 @@ import Tab from "../styled/Tab";
 class Main extends Component {
   static propTypes = {
     location: PropTypes.object,
+    stopFetch: PropTypes.func,
     loadV2exTopics: PropTypes.func,
-    topics: PropTypes.array,
-    hotTopics: PropTypes.array
+    topics: PropTypes.array
   };
 
   componentDidMount() {
+    this.props.stopFetch();
     const nodeName = new URLSearchParams(this.props.location.search).get("tab");
     const contentType = nodeName ? nodeName : "programmer";
     this.props.loadV2exTopics(contentType);
@@ -60,7 +61,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadV2exTopics: contentType =>
-    dispatch({ type: "LOAD_V2EX_TOPICS", contentType })
+    dispatch({ type: "LOAD_V2EX_TOPICS", contentType }),
+  stopFetch: () => dispatch({ type: "STOP_FETCH" })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

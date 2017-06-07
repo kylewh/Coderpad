@@ -14,10 +14,12 @@ import UL from "./styled/UL";
 
 class HackerNews extends Component {
   static propTypes = {
+    stopFetch: PropTypes.func,
     loadHackerNews: PropTypes.func,
     stories: PropTypes.array
   };
   componentDidMount() {
+    this.props.stopFetch();
     this.props.loadHackerNews();
   }
 
@@ -39,7 +41,8 @@ class HackerNews extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  loadHackerNews: () => dispatch({ type: "LOAD_HACKERNEWS" })
+  loadHackerNews: () => dispatch({ type: "LOAD_HACKERNEWS" }),
+  stopFetch: () => dispatch({ type: "STOP_FETCH" })
 });
 
 const mapStateToProps = state => ({

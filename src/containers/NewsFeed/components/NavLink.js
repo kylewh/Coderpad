@@ -33,10 +33,10 @@ class NavLink extends PureComponent {
   render() {
     const { filter } = this.props;
     const { label, icon } = this.mapFilterToItemConfig(filter);
+    console.log(`/news/${filter}`);
     return (
       <LINK
         to={!filter ? "/news/hackernews" : `/news/${filter}`}
-        exact
         activeClassName={"btn-active"}
       >
         <BottomNavigationItem label={label} icon={icon} />

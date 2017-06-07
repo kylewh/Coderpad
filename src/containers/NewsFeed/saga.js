@@ -1,8 +1,4 @@
-import {
-  call,
-  put,
-  takeLatest
-} from 'redux-saga/effects'
+import { call, fork, put, take, takeLatest, cancel } from 'redux-saga/effects'
 import axios from 'axios'
 import moment from 'moment'
 
@@ -11,8 +7,8 @@ const wrapApiKey = 'vZpCx0QXD65gAcUD4Q7gAL6y0GQB1pgT'
 const GITHUB_BASE_URL =
   'https://wrapapi.com/use/sunnysingh/github/trending/0.0.4?wrapAPIKey=' +
   wrapApiKey
-// const V2EX_BASE_URL = 'https://www.v2ex.com/api'
-const V2EX_BASE_URL = "/news/v2ex";
+// const V2EX_BASE_URL = "https://www.v2ex.com/api";
+const V2EX_BASE_URL = '/news/v2ex'
 
 /**
  * 30 top stories from hackerNews
@@ -123,7 +119,7 @@ const fetchV2exTopics = contentType => {
   return axios.get(url).then(res => res.data)
 }
 
-function * loadV2exTopics ({ contentType }) {
+function * loadV2exTopics (contentType) {
   try {
     let topics = yield call(fetchV2exTopics, contentType)
     yield put({
@@ -152,22 +148,75 @@ function * loadV2exHot () {
   }
 }
 
+/**
+ * Older Version Watchers : cannot prevent fetch waste
+ */
 export function * watchLoadV2exTopic () {
-  yield takeLatest('LOAD_V2EX_TOPIC', loadV2exTopic)
+  const v2exTopicTask = yield takeLatest('LOAD_V2EX_TOPIC', loadV2exTopic)
 }
 
 export function * watchLoadV2exTopics () {
-  yield takeLatest('LOAD_V2EX_TOPICS', loadV2exTopics)
+  const v2exTopicsTask = yield takeLatest('LOAD_V2EX_TOPICS', loadV2exTopics)
 }
 
 export function * watchLoadV2exHot () {
-  yield takeLatest('LOAD_V2EX_HOT', loadV2exHot)
-}
-
-export function * watchLoadHackerNews () {
-  yield takeLatest('LOAD_HACKERNEWS', loadHackerNewsData)
+  const v2exHotTask = yield takeLatest('LOAD_V2EX_HOT', loadV2exHot)
 }
 
 export function * watchLoadGitHub () {
-  yield takeLatest('LOAD_GITHUB', loadGithub)
+  const githubTask = yield takeLatest('LOAD_GITHUB', loadGithub)
+}
+
+/**
+ * Newest Version Watchers: Effectively eliminate waste of fetch
+ */
+export function * watchLoadHackerNews () {
+  const hackerNewsTask = yield takeLatest(
+    'LOAD_HACKERNEWS',
+    loadHackerNewsData
+  )
+}
+
+export function * watchV2exTopic () {
+  while (yield take('LOAD_V2EX_TOPIC')) {
+    const v2exTopicTask = yield fork(loadV2exTopic)
+    yield take('STOP_FETCH')
+    console.log('cancel')
+    yield cancel(v2exTopicTask)
+  }
+}
+
+export function * watchV2exTopics () {
+  let action // we need the 'contentType' from action as argument passed to worker.
+  while ((action = yield take('LOAD_V2EX_TOPICS'))) {
+    const v2exTopicsTask = yield fork(loadV2exTopics, action.contentType)
+    yield take('STOP_FETCH')
+    console.log('cancel')
+    yield cancel(v2exTopicsTask)
+  }
+}
+
+export function * watchV2exHot () {
+  while (yield take('LOAD_V2EX_HOT')) {
+    const v2exHotTask = yield fork(loadV2exHot)
+    yield take('STOP_FETCH')
+    console.log('cancel')
+    yield cancel(v2exHotTask)
+  }
+}
+
+export function * watchHackerNews () {
+  while (yield take('LOAD_HACKERNEWS')) {
+    const hackNewsTask = yield fork(loadHackerNewsData)
+    yield take('STOP_FETCH')
+    yield cancel(hackNewsTask)
+  }
+}
+
+export function * watchGithub () {
+  while (yield take('LOAD_GITHUB')) {
+    const githubTask = yield fork(loadGithub)
+    yield take('STOP_FETCH')
+    yield cancel(githubTask)
+  }
 }

@@ -15,7 +15,7 @@ class DashBoard extends PureComponent {
             <IdeaSVG />
           </Card>
         </NormalLink>
-        <NormalLink to='/news'>
+        <NormalLink to='/news/v2ex'>
           <Card news>
             <NewsSVG />
           </Card>
