@@ -52,7 +52,7 @@ class Content extends PureComponent {
       created,
       content_rendered
     } = this.props.topic.toJS();
-
+    
     return (
       <div>
         {this.props.topic.toJS() &&

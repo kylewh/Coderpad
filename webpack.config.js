@@ -7,14 +7,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 var BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 
-const VENDOR_LIST = ["react", "redux", "redux-logger", "react-dom"];
-
-// entry: [
-//   "webpack-dev-server/client?http://localhost:8080",
-//   "webpack/hot/only-dev-server",
-//   "./src/index.js"
-// ],
-
 module.exports = {
   entry: {
     app: "./src/index.js",
@@ -22,8 +14,6 @@ module.exports = {
   },
   // devtool: "cheap-module-source-map",
   output: {
-    // // filename: "[name].[chunkhash].js",
-    // filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
     filename: "[name]-[chunkhash].js"
   },
@@ -61,7 +51,6 @@ module.exports = {
     ]
   },
   plugins: [
-    //new webpack.HotModuleReplacementPlugin(),
     new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       template: "./index.html",

@@ -27,7 +27,6 @@ class Hot extends Component {
   };
 
   componentDidMount() {
-    console.log("rerender");
     this.props.loadHotTopics();
   }
 

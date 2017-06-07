@@ -86,7 +86,16 @@ const fetchV2exTopic = id => {
   return axios
     .get(url)
     .then(res => {
-      ret.topicInfo = res.data[0]
+      /**
+       *  WATCH OUT!!!!
+       *  When in dev environment we use v2ex api directly
+       *  So the data's sturcture will be different
+       */
+      if (V2EX_BASE_URL === '/news/v2ex') {
+        ret.topicInfo = res.data
+      } else if (V2EX_BASE_URL === 'https://www.v2ex.com/api') {
+        ret.topicInfo = res.data[0]
+      }
       return axios.get(repliesUrl)
     })
     .then(res => {
@@ -180,10 +189,8 @@ export function * watchLoadHackerNews () {
 export function * watchV2exTopic () {
   let action
   while ((action = yield take('LOAD_V2EX_TOPIC'))) {
-    console.log(action.id)
     const v2exTopicTask = yield fork(loadV2exTopic, action.id)
     yield take('STOP_FETCH')
-    console.log('cancel')
     yield cancel(v2exTopicTask)
   }
 }
@@ -193,7 +200,6 @@ export function * watchV2exTopics () {
   while ((action = yield take('LOAD_V2EX_TOPICS'))) {
     const v2exTopicsTask = yield fork(loadV2exTopics, action.contentType)
     yield take('STOP_FETCH')
-    console.log('cancel')
     yield cancel(v2exTopicsTask)
   }
 }
@@ -202,7 +208,6 @@ export function * watchV2exHot () {
   while (yield take('LOAD_V2EX_HOT')) {
     const v2exHotTask = yield fork(loadV2exHot)
     yield take('STOP_FETCH')
-    console.log('cancel')
     yield cancel(v2exHotTask)
   }
 }
