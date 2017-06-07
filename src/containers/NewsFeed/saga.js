@@ -179,7 +179,7 @@ export function * watchLoadHackerNews () {
 
 export function * watchV2exTopic () {
   let action
-  while (action = yield take('LOAD_V2EX_TOPIC')) {
+  while ((action = yield take('LOAD_V2EX_TOPIC'))) {
     console.log(action.id)
     const v2exTopicTask = yield fork(loadV2exTopic, action.id)
     yield take('STOP_FETCH')
